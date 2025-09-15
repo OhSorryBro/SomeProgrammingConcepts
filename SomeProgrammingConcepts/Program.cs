@@ -1,11 +1,15 @@
-﻿using System;
-using SomeProgrammingConcepts;
+﻿using SomeProgrammingConcepts;
+using System;
+using static SomeProgrammingConcepts.SomeLongRunningData;
 
 public class Program
 {
 
     public static void Main(string[] args)
     {
+        SomeLongRunningData sm = new SomeLongRunningData();
+        Task.Run(() => sm.SomeMethod(SomeLongRunningData.CallBackMethod));
+        Task.Run(() => sm.SomeMethod(SomeLongRunningData.CallBackMethod2));
         Delegates.Arithmetic add = (num1, num2) => Console.WriteLine($"Addition: {num1 + num2}");
         Delegates.Arithmetic subtract = (num1, num2) => Console.WriteLine($"Subtraction: {num1 - num2}");
         Delegates.Arithmetic multiply = (num1, num2) => Console.WriteLine($"Multiplication: {num1 * num2}");
@@ -53,5 +57,7 @@ public class Program
         }
         operation(number1, number2);
         return;
+
+
     }
 }
