@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SomeProgrammingConcepts.Delegates;
 
 namespace SomeProgrammingConcepts
 {
@@ -57,5 +58,36 @@ namespace SomeProgrammingConcepts
                 Console.Write($"-{i}-");
             }
         }
+
+        public int Add(int x, int y) => x + y;
+        public int Subtract(int x, int y) => x - y;
+
+        public void OnIntialized(MathOperation obj)
+        {
+            Console.WriteLine($"Addition: {obj(5, 3)}");
+        }
+        
+        public void XaXa()
+        {
+            var numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            var evenNumbers = FilterList(numbers, IsEven);
+            Console.WriteLine("Even Numbers: " + string.Join(", ", evenNumbers));
+        }
+
+
+        private List<int> FilterList(List<int> list, Filter <int> filter)
+        {
+            var result = new List<int>();
+            foreach (var item in list)
+            {
+                if (filter(item))
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
+        }
+
+        private bool IsEven(int number) => number % 2 == 0;
     }
 }

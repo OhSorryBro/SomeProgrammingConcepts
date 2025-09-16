@@ -20,7 +20,8 @@ public class Program
             else
                 Console.WriteLine("Division by zero is not allowed.");
         };
-
+        Task.Run(() => sm.OnIntialized(sm.Add));
+        Task.Run(() => sm.XaXa());
 
         Console.WriteLine("Type in first number");
         double number1 = Convert.ToDouble(Console.ReadLine());
@@ -59,5 +60,5 @@ public class Program
         return;
 
 
-    }
+}
 }
