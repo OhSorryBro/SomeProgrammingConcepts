@@ -7,6 +7,25 @@ public class Program
 
     public static void Main(string[] args)
     {
+
+        Simulation simulation = new Simulation();
+        MyObject1 myObject1 = new MyObject1(simulation);
+        MyObject2 myObject2 = new MyObject2(simulation);
+        simulation.Simulate();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         SomeLongRunningData sm = new SomeLongRunningData();
         Task.Run(() => sm.SomeMethod(SomeLongRunningData.CallBackMethod));
         Task.Run(() => sm.SomeMethod(SomeLongRunningData.CallBackMethod2));
