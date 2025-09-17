@@ -27,10 +27,10 @@ Define delegate void MyPrinter(string msg);
 
 
         /*
-    2. Addition and Multiplication
-    Define delegate int Operation(int a, int b);
-            Create two methods: Add and Multiply.
-            Attach them to the delegate and call with different numbers.
+2. Addition and Multiplication
+Define delegate int Operation(int a, int b);
+        Create two methods: Add and Multiply.
+        Attach them to the delegate and call with different numbers.
         */
 
 
