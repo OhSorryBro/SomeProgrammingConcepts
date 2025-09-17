@@ -8,6 +8,12 @@ public class Program
 
     public static void Main(string[] args)
     {
+
+
+
+
+
+        /*🔹 Level 1 – Warm-up
         //Creation of instance of Task1 class
         Task1 t = new Task1();
         //Creation of delegate instance and linking it to Print method
@@ -15,9 +21,24 @@ public class Program
         //Invoking the delegate
         d("papa");
 
-
-
-
+        Calculation c = t.Add;
+        var var1 = c(4, 5);
+        c += t.Multiply;
+        c += t.Add;
+        List<int> results = new List<int>();
+        foreach (Calculation calc in c.GetInvocationList())
+        {
+            results.Add(calc(4, 5));
+        }
+        // So basically we print Add,Multiply,Add in that order because
+        // we added them in that order to the delegate chain
+        // 
+        Console.WriteLine($"Var1: {var1}");
+        foreach ( int result in results)
+        {
+            Console.WriteLine(result);
+        }
+        */
 
 
 

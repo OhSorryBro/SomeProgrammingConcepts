@@ -27,12 +27,22 @@ Define delegate void MyPrinter(string msg);
 
 
         /*
-    2. Addition and Multiplication
-    Define delegate int Operation(int a, int b);
-            Create two methods: Add and Multiply.
-            Attach them to the delegate and call with different numbers.
+2. Addition and Multiplication
+Define delegate int Operation(int a, int b);
+        Create two methods: Add and Multiply.
+        Attach them to the delegate and call with different numbers.
         */
-
+        public delegate int Calculation(int a, int b);
+        public int Add(int a, int b)
+        {
+            Console.WriteLine(a + b);
+                return a+b;
+        }
+        public int Multiply(int a, int b)
+        {
+            Console.WriteLine(a * b);
+                return a * b;
+        }
 
 
     }
