@@ -13,5 +13,10 @@ namespace SomeProgrammingConcepts
         public delegate bool Filter<T>(T item);
         public delegate int MathOperation(int x, int y);
         
+
+
+
+
+
     }
 }
