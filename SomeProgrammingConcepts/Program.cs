@@ -1,17 +1,24 @@
 ﻿using SomeProgrammingConcepts;
 using System;
+using System.Diagnostics;
 using static SomeProgrammingConcepts.SomeLongRunningData;
 using static SomeProgrammingConcepts.Task1;
+using static SomeProgrammingConcepts.Task2;
 
 public class Program
 {
 
     public static void Main(string[] args)
     {
-
-
-
-
+        Task2 t2 = new Task2();
+        Logger l = t2.LogToConsole;
+        l("123");
+        l += t2.LogToList;
+        l("456");
+        l("a");
+        l("b");
+        l("c");
+        t2.PrintLogToList();
 
         /*🔹 Level 1 – Warm-up
         //Creation of instance of Task1 class
