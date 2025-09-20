@@ -20,6 +20,15 @@ public class Program
         l("c");
         t2.PrintLogToList();
 
+        Task2.Clock clock = new Task2.Clock();
+                clock.Tick += t2.ClockLogToConsole;
+                clock.Tick += t2.ClockCountElapsedTime;
+                Task.Run(() => clock.Start());
+        // Running the clock in a separate task to avoid blocking the main thread
+        Console.ReadKey();
+
+
+
         /*🔹 Level 1 – Warm-up
         //Creation of instance of Task1 class
         Task1 t = new Task1();

@@ -37,12 +37,32 @@ namespace SomeProgrammingConcepts
     4.  Clock event
         Create a Clock class that every 2 seconds invokes a delegate Action<int> with the current tick.
         Subscribe two handlers: one logs to console, the other counts total elapsed time.
-
-
-
-
-
-
                             */
+        public class Clock 
+        {
+            public event Action<int> Tick;
+            private int tickCount = 0;
+            public void Start()
+            {
+                while (true)
+                {
+                    System.Threading.Thread.Sleep(2000);
+                    tickCount++;
+                    Tick?.Invoke(tickCount);
+                }
+            }
+        }
+        public void ClockLogToConsole(int tick)
+        {
+            Console.WriteLine($"Clock is at it's {tick}");
+        }
+        public int totalElapsedTime = 0;
+        public void ClockCountElapsedTime(int tick)
+        {
+            totalElapsedTime = tick * 2;
+            Console.WriteLine($"Total elapsed time: {totalElapsedTime} seconds");
+        }
+
+
     }
 }
