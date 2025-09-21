@@ -11,9 +11,10 @@ public class Program
 
     public static void Main(string[] args)
     {
-
-
-
+        Task4 t4 = new Task4();
+        for (int i =0; i<2; i++)
+            t4.DownloadFile("http://example.com/file1", (result) => Console.WriteLine(result));
+        t4.ProcessData(10, step=> t4.PrintProgressBar(step, 10));
 
 
         /*🔹 Level 3 – Calculator and filter
