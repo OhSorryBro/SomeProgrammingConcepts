@@ -4,12 +4,59 @@ using System.Diagnostics;
 using static SomeProgrammingConcepts.SomeLongRunningData;
 using static SomeProgrammingConcepts.Task1;
 using static SomeProgrammingConcepts.Task2;
+using static SomeProgrammingConcepts.Task3;
 
 public class Program
 {
 
     public static void Main(string[] args)
     {
+
+
+
+
+
+        /*🔹 Level 3 – Calculator and filter
+        Task3 t3 = new Task3();
+        Operation o = t3.Add;
+        var Result = t3.RunOperation(4, 5, o);
+        t3.PrintResult(Result,o);
+
+        o = t3.Subtract;
+        var Result2 = t3.RunOperation(4, 5, o);
+        t3.PrintResult(Result2, o);
+
+        o = t3.Multiply;
+        var Result3 = t3.RunOperation(4, 5, o);
+        t3.PrintResult(Result3, o);
+
+
+        o = t3.Max;
+        var Result4 = t3.RunOperation(4, 5, o);
+        t3.PrintResult(Result4, o);
+
+
+
+
+        Filter filter = t3.IsEven;
+        List<int> numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+        List<int> resultNumbers = t3.FilterList(numbers, filter);
+        t3.PrintFilteredList(resultNumbers);
+
+        filter = t3.IsGreaterThan10;
+        List <int> resultNumbers2 = t3.FilterList(numbers, filter);
+        t3.PrintFilteredList(resultNumbers2);
+
+        filter = t3.IsDivisibleBy3;
+        List<int> resultNumbers3 = t3.FilterList(numbers, filter);
+        t3.PrintFilteredList(resultNumbers3);
+        /*
+
+
+
+        /* Level 2 – Multiple subscribers
+
+
         Task2 t2 = new Task2();
         Logger l = t2.LogToConsole;
         l("123");
@@ -26,7 +73,7 @@ public class Program
                 Task.Run(() => clock.Start());
         // Running the clock in a separate task to avoid blocking the main thread
         Console.ReadKey();
-
+        */
 
 
         /*🔹 Level 1 – Warm-up
