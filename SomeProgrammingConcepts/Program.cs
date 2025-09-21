@@ -11,11 +11,58 @@ public class Program
 
     public static void Main(string[] args)
     {
+        Task5 t5 = new Task5();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        string question = "2,3,Add";
+        t5.questions.Add(question);
+        Console.WriteLine(question);
+        Operation op = t5.Add;
+        int answer = Convert.ToInt16(Console.ReadLine());
+        int goodAnswer = op(2, 3);
+        if(answer == goodAnswer)
+            Console.WriteLine("Correct");
+        else
+            Console.WriteLine($"Wrong, seems like you eat bananas for their shape and not for their taste, " +
+                $" the correct answer is {goodAnswer}");
+        question = "12,3,Subtract";
+        t5.questions.Add(question);
+        Console.WriteLine(question);
+        op = t5.Subtract;
+        answer = Convert.ToInt16(Console.ReadLine());
+        goodAnswer = op(12, 3);
+        if (answer == goodAnswer)
+            Console.WriteLine("Correct");
+        else
+            Console.WriteLine($"Wrong, seems like you eat bananas for their shape and not for their taste, " +
+                $" the correct answer is {goodAnswer}");
+
+
+
+
+
+        /*🔹 Level 4 – Async file download and progress bar
+
+
         Task4 t4 = new Task4();
         for (int i =0; i<2; i++)
             t4.DownloadFile("http://example.com/file1", (result) => Console.WriteLine(result));
         t4.ProcessData(10, step=> t4.PrintProgressBar(step, 10));
-
+        */
 
         /*🔹 Level 3 – Calculator and filter
         Task3 t3 = new Task3();
