@@ -12,22 +12,27 @@ public class Program
 
     public static void Main(string[] args)
     {
+        RealDelegates1 rd = new RealDelegates1();
+        List<int> numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        List<int> evenNumbers = rd.FilterList(numbers, num => num % 2 == 0);
+        rd.PrintList(evenNumbers);
+
+
+
+
+
+
+
+
+
+
+
+        /*
         Task5 t5 = new Task5();
         List<int> numbers = new List<int>() {1,2,3,4,5,6,7,8,9,10 };
         TestDel TD = t5.Square;
         TD += t5.Double;
         TD += t5.PrintStars;
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -56,7 +61,7 @@ public class Program
             Console.WriteLine($"Wrong, seems like you eat bananas for their shape and not for their taste, " +
                 $" the correct answer is {goodAnswer}");
 
-
+        */
 
 
 

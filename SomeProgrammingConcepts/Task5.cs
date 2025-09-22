@@ -63,7 +63,7 @@ namespace SomeProgrammingConcepts
         }
         public void PrintStars(int a)
         {
-                Console.WriteLine(a * '*');
+            Console.WriteLine(a * '*');
         }
 
     }
