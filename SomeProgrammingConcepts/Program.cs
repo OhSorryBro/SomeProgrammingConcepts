@@ -5,6 +5,7 @@ using static SomeProgrammingConcepts.SomeLongRunningData;
 using static SomeProgrammingConcepts.Task1;
 using static SomeProgrammingConcepts.Task2;
 using static SomeProgrammingConcepts.Task3;
+using static SomeProgrammingConcepts.Task5;
 
 public class Program
 {
@@ -12,6 +13,10 @@ public class Program
     public static void Main(string[] args)
     {
         Task5 t5 = new Task5();
+        List<int> numbers = new List<int>() {1,2,3,4,5,6,7,8,9,10 };
+        TestDel TD = t5.Square;
+        TD += t5.Double;
+        TD += t5.PrintStars;
 
 
 
@@ -31,7 +36,7 @@ public class Program
         string question = "2,3,Add";
         t5.questions.Add(question);
         Console.WriteLine(question);
-        Operation op = t5.Add;
+        Task5.Operation op = t5.Add;
         int answer = Convert.ToInt16(Console.ReadLine());
         int goodAnswer = op(2, 3);
         if(answer == goodAnswer)

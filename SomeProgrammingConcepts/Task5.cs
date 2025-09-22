@@ -45,8 +45,26 @@ namespace SomeProgrammingConcepts
     For numbers 1–10, attach different “actions”: Square, Double, PrintStars (e.g., 3 → "***").
     Run all actions in sequence for each number.
        */
-
-
+        public List<int> numbers = new List<int>();
+        public delegate int TestDel (int a);
+        public int Square(int a)
+        {
+        int firstvalue = a;
+        int result = firstvalue;
+        for(int i = 0; i < a ; i++)
+            {
+                result = result * firstvalue;
+            }
+        return  result;
+        }
+        public int Double(int a)
+        {
+            return a * 2;
+        }
+        public void PrintStars(int a)
+        {
+                Console.WriteLine(a * '*');
+        }
 
     }
 }
