@@ -12,16 +12,21 @@ public class Program
 
     public static void Main(string[] args)
     {
+        //Task 1 new RealDelegates1
         RealDelegates1 rd = new RealDelegates1();
         List<int> numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         List<int> evenNumbers = rd.FilterList(numbers, num => num % 2 == 0);
         rd.PrintList(evenNumbers);
 
 
+        //Task 2 new RealDelegates1
+        List<string> words = new List<string>() { "apple", "banana", "cherry" };
+        List <int> wordsLenght = rd.TransformList(words, str => str.Length);
+        rd.PrintList(wordsLenght);
 
-
-
-
+        //Task 3 new RealDelegates1
+        rd.PerformAction(numbers, rd.PrintNumber);
+        rd.PerformAction(numbers,rd.PrintNumberTwice);
 
 
 

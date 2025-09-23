@@ -45,10 +45,41 @@ namespace SomeProgrammingConcepts
         //2.  Transforming a list
         //Write a method that takes a list of strings and a Func<string, int>.
         //Return a list of word lengths.
+        Func<string, int> lengthFunc; // Example: get string lengths
+        public List<int> TransformList(List<string> strings, Func<string, int> lengthFunc)
+        {
+            var result = new List<int>();
+            foreach (var str in strings)
+            {
+                result.Add(lengthFunc(str));
+            }
+            return result;
+        }
+
+
 
 
         //3. Performing an action on each element
         //Write a method that takes a list of integers and an Action<int>.
         //Execute the action for each element (e.g., print it).
+        public void PerformAction(List<int> numbers, Action<int> action)
+        {
+            foreach (var number in numbers)
+            {
+                action(number);
+            }
+        }
+        public void PrintNumber(int number)
+        {
+            Console.WriteLine(number);
+        }
+
+        public void PrintNumberTwice(int number)
+        {
+            Console.WriteLine(number);
+            Console.WriteLine(number);
+        }
+
+
     }
 }
