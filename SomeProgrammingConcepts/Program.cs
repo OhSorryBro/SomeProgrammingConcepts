@@ -12,6 +12,29 @@ public class Program
 
     public static void Main(string[] args)
     {
+        RealDelegates2 rd2 = new RealDelegates2();
+
+        // Task 4 new RealDelegates2
+        Func<int, int> ComposedFunction = rd2.Compose(rd2.AddOne, rd2.AddTwo);
+        int x= ComposedFunction(3);
+        Console.WriteLine(x);
+
+
+        // Task 5 new RealDelegates2
+        int[] numbers = new int[] { 1, 2};
+        int result = rd2.DoOperation(numbers, rd2.Min);
+        Console.WriteLine($"{result}");
+
+        //Task 6 new RealDelegates2
+        List<string> words = new List<string>() { "apple", "banana", "cherry" };
+
+            foreach (string word in words)
+                {
+            rd2.TransformString(word, rd2.ToUpp, rd2.PrintString);
+                }
+
+
+        /*
         //Task 1 new RealDelegates1
         RealDelegates1 rd = new RealDelegates1();
         List<int> numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -30,7 +53,7 @@ public class Program
 
 
 
-
+        */
 
         /*
         Task5 t5 = new Task5();
