@@ -12,6 +12,7 @@ public class Program
 
     public static void Main(string[] args)
     {
+        
         //7. Validation
         RealDelegates3 rd3 = new RealDelegates3();
         int value = 15;
@@ -23,7 +24,8 @@ public class Program
         //8. Retry logic
         rd3.Retry(rd3.UnreliableOperation, 5);
 
-
+        //9. Event bus
+        rd3.EventBusExample();
 
 
 

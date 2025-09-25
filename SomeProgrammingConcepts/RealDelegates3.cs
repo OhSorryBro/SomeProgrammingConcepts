@@ -73,16 +73,35 @@ namespace SomeProgrammingConcepts
 //9. Simple event system
 //Write a class EventBus that allows you to subscribe with
 //Action<string> and then trigger all registered actions via Publish(string message).
+    public class EventBus
+        {
+            private List<Action<string>> subscribers = new List<Action<string>>();
+            public void Subscribe(Action<string> action)
+            {
+                subscribers.Add(action);
+            }
+            public void  Publish(string message)
+            { foreach (var action in subscribers)
+                {
+                    action(message);
+                }
+            }
+        }
+        public void EventBusExample()
+        {
+            EventBus eventBus = new EventBus();
+            eventBus.Subscribe((msg) => Console.WriteLine($"Subscriber 1 received: {msg}"));
+            eventBus.Subscribe((msg) => Console.WriteLine($"Subscriber 2 received: {msg}"));
+            eventBus.Publish("Hello, EventBus!");
+        }
 
 
 
 
-
-
-//10. Mini processing pipeline
-//Write a method RunPipeline(int input, List<Func<int, int>> steps, Action<int> output),
-//which passes the input through each function in steps and then calls the output action
-//with the final result.
+        //10. Mini processing pipeline
+        //Write a method RunPipeline(int input, List<Func<int, int>> steps, Action<int> output),
+        //which passes the input through each function in steps and then calls the output action
+        //with the final result.
 
 
 
