@@ -12,6 +12,27 @@ public class Program
 
     public static void Main(string[] args)
     {
+        //7. Validation
+        RealDelegates3 rd3 = new RealDelegates3();
+        int value = 15;
+        rd3.Validate<int>(value, rd3.isGreaterThan10, rd3.OnValidAction, rd3.OnInvalidAction);
+        value = 5;
+        rd3.Validate<int>(value, rd3.isGreaterThan10, rd3.OnValidAction, rd3.OnInvalidAction);
+
+
+        //8. Retry logic
+        rd3.Retry(rd3.UnreliableOperation, 5);
+
+
+
+
+
+
+
+
+
+        // Task 4,5,6 new RealDelegates2
+        /*
         RealDelegates2 rd2 = new RealDelegates2();
 
         // Task 4 new RealDelegates2
@@ -32,7 +53,7 @@ public class Program
                 {
             rd2.TransformString(word, rd2.ToUpp, rd2.PrintString);
                 }
-
+        */
 
         /*
         //Task 1 new RealDelegates1

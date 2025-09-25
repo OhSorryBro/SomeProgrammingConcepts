@@ -15,13 +15,57 @@ namespace SomeProgrammingConcepts
 //7. Input validation
 //Write a method Validate<T>(T value, Func<T, bool> validator, Action<T> onValid, Action<T> onInvalid).
 //– If validator(value) returns true, call onValid(value), otherwise onInvalid(value).
+        
+    public void Validate<T>(T value, Func<T,bool> validator, Action<T> onValid, Action<T> onInvalid)
+        {
+            if (validator(value))
+            {
+                onValid(value);
+            }
+            else
+            {
+                onInvalid(value);
+            }
+        }
+    public bool isGreaterThan10(int value)
+        {
+            return value > 10;
+        }
 
-
+    public void OnValidAction<T>(T value)
+        {
+            Console.WriteLine($"Value {value} is valid.");
+        }
+    public void OnInvalidAction<T>(T value)
+        {
+            Console.WriteLine($"Value {value} in invalid.");
+        }
 
 
 //8. Retry logic
 //Write a method Retry(Func<bool> operation, int attempts),
 //which tries to execute operation up to attempts times until it returns true.
+    public void Retry(Func<bool> operation, int attempts)
+        {
+            for (int i=0;i<attempts;i++)
+            {
+                bool sucess = operation();
+                Console.WriteLine($"Attempt {i+1}: {(sucess==true?"Sucess":"Fail")}");
+                if (sucess == true)
+                {
+                    Console.WriteLine("Operation sucess");
+                    break;
+                }
+            }
+        }
+    public bool UnreliableOperation()
+        {
+            int var1 = 3;
+            int var2 = 5;
+            return var1 > var2;
+        }
+    
+
 
 
 
@@ -33,10 +77,14 @@ namespace SomeProgrammingConcepts
 
 
 
+
+
 //10. Mini processing pipeline
 //Write a method RunPipeline(int input, List<Func<int, int>> steps, Action<int> output),
 //which passes the input through each function in steps and then calls the output action
 //with the final result.
+
+
 
 
 
