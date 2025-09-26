@@ -10,13 +10,13 @@ namespace SomeProgrammingConcepts
 {
     internal class RealDelegates3
     {
-//        Level 3 – More realistic scenarios
+        //        Level 3 – More realistic scenarios
 
-//7. Input validation
-//Write a method Validate<T>(T value, Func<T, bool> validator, Action<T> onValid, Action<T> onInvalid).
-//– If validator(value) returns true, call onValid(value), otherwise onInvalid(value).
-        
-    public void Validate<T>(T value, Func<T,bool> validator, Action<T> onValid, Action<T> onInvalid)
+        //7. Input validation
+        //Write a method Validate<T>(T value, Func<T, bool> validator, Action<T> onValid, Action<T> onInvalid).
+        //– If validator(value) returns true, call onValid(value), otherwise onInvalid(value).
+
+        public void Validate<T>(T value, Func<T, bool> validator, Action<T> onValid, Action<T> onInvalid)
         {
             if (validator(value))
             {
@@ -27,30 +27,30 @@ namespace SomeProgrammingConcepts
                 onInvalid(value);
             }
         }
-    public bool isGreaterThan10(int value)
+        public bool isGreaterThan10(int value)
         {
             return value > 10;
         }
 
-    public void OnValidAction<T>(T value)
+        public void OnValidAction<T>(T value)
         {
             Console.WriteLine($"Value {value} is valid.");
         }
-    public void OnInvalidAction<T>(T value)
+        public void OnInvalidAction<T>(T value)
         {
             Console.WriteLine($"Value {value} in invalid.");
         }
 
 
-//8. Retry logic
-//Write a method Retry(Func<bool> operation, int attempts),
-//which tries to execute operation up to attempts times until it returns true.
-    public void Retry(Func<bool> operation, int attempts)
+        //8. Retry logic
+        //Write a method Retry(Func<bool> operation, int attempts),
+        //which tries to execute operation up to attempts times until it returns true.
+        public void Retry(Func<bool> operation, int attempts)
         {
-            for (int i=0;i<attempts;i++)
+            for (int i = 0; i < attempts; i++)
             {
                 bool sucess = operation();
-                Console.WriteLine($"Attempt {i+1}: {(sucess==true?"Sucess":"Fail")}");
+                Console.WriteLine($"Attempt {i + 1}: {(sucess == true ? "Sucess" : "Fail")}");
                 if (sucess == true)
                 {
                     Console.WriteLine("Operation sucess");
@@ -58,30 +58,31 @@ namespace SomeProgrammingConcepts
                 }
             }
         }
-    public bool UnreliableOperation()
+        public bool UnreliableOperation()
         {
             int var1 = 3;
             int var2 = 5;
             return var1 > var2;
         }
-    
 
 
 
 
 
-//9. Simple event system
-//Write a class EventBus that allows you to subscribe with
-//Action<string> and then trigger all registered actions via Publish(string message).
-    public class EventBus
+
+        //9. Simple event system
+        //Write a class EventBus that allows you to subscribe with
+        //Action<string> and then trigger all registered actions via Publish(string message).
+        public class EventBus
         {
             private List<Action<string>> subscribers = new List<Action<string>>();
             public void Subscribe(Action<string> action)
             {
                 subscribers.Add(action);
             }
-            public void  Publish(string message)
-            { foreach (var action in subscribers)
+            public void Publish(string message)
+            {
+                foreach (var action in subscribers)
                 {
                     action(message);
                 }
@@ -103,9 +104,24 @@ namespace SomeProgrammingConcepts
         //which passes the input through each function in steps and then calls the output action
         //with the final result.
 
+        public List<Func<int, int>> steps;
+        public void RunPipeLine(int input, List<Func<int, int>> steps, Action<int> output)
+        {
+            int result = input;
+            foreach (var step in steps)
+            {
+                result = step(result);
+            }
+            output(result);
+        }
+        public int Add2(int x) { return x + 2; }
+        public int MultiplyBy3(int x) { return x * 3; }
+        public void OutputResult(int result)
+        {
+            Console.WriteLine($"Final result: {result}");
 
 
 
-
+        }
     }
 }

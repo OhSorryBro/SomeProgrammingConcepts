@@ -12,7 +12,7 @@ public class Program
 
     public static void Main(string[] args)
     {
-        
+        /*
         //7. Validation
         RealDelegates3 rd3 = new RealDelegates3();
         int value = 15;
@@ -27,8 +27,14 @@ public class Program
         //9. Event bus
         rd3.EventBusExample();
 
-
-
+        //10. Pipeline
+        rd3.steps = new List<Func<int, int>>()
+        {
+            rd3.Add2,
+            rd3.MultiplyBy3
+        };
+        rd3.RunPipeLine(5, rd3.steps, rd3.OutputResult);
+        */
 
 
 
