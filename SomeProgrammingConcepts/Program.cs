@@ -12,6 +12,19 @@ public class Program
 
     public static void Main(string[] args)
     {
+        //Intermediate Delegates tasks
+        //1. Custom Where with logging
+
+        Delegates_Intermediate di = new Delegates_Intermediate();
+        List<int> FilteredWithLogResult = di.FilterWithLog<int>(new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, di.isEven, di.PrintItem);
+        di.PrintList<int>(FilteredWithLogResult);
+
+
+        //2. Map & Reduce
+
+
+
+
         /*
         //7. Validation
         RealDelegates3 rd3 = new RealDelegates3();
