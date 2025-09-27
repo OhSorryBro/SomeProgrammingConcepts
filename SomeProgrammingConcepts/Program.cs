@@ -21,8 +21,13 @@ public class Program
 
 
         //2. Map & Reduce
+        List<string> strings = new List<string>();
+        strings.AddRange( new[] { "apple", "banana", "cherry", "laptop" });
+
+        di.PrintFromReduce(di.MapReduce(strings, di.CountChars, di.Sum));
 
 
+        //3. Retry with delay
 
 
         /*

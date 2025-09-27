@@ -65,12 +65,51 @@ namespace SomeProgrammingConcepts
         //maps a list of T into a list of U using a Func<T, U>,
         //then reduces the list into a single result using a Func<U, U, U>.
 
+        public U MapReduce<T, U>(IEnumerable<T> items, Func<T, U> mapFunc, Func<U, U, U> reduceFunc)
+        {
+            List<U> mappedItems = new List<U>();
+            foreach (var item in items)
+            {                 
+                mappedItems.Add(mapFunc(item));
+            }
+            return mappedItems.Aggregate(reduceFunc);
+        }
 
+        public int CountChars(string str)
+        {
+            return str.Length;
+        }
 
+        public int Sum(int a, int b)
+        {
+            return a + b;
+        }
+
+        public void PrintFromReduce<U>(U item)
+        {
+            Console.WriteLine($"Result from Reduce: " + item);
+        }
 
         //3. Retry with delay
-        //Extend your Retry method so it accepts an additional Func<int, int> parameter — a delay strategy(e.g., for attempt i, return milliseconds to wait). Add a delay between retries.
+        //Extend your Retry method so it accepts an additional Func<int, int> parameter — a delay strategy
+        //(e.g., for attempt i, return milliseconds to wait).
+        //Add a delay between retries.
 
+
+        //MIKE TO_DO: add delay
+        public void RetryWithDelay(Func<bool> operation, int attempts, Func<int, int> parameter)
+        {
+            for (int i = 0; i < attempts; i++)
+            {
+                bool sucess = operation();
+                Console.WriteLine($"Attempt {i + 1}: {(sucess == true ? "Sucess" : "Fail")}");
+                if (sucess == true)
+                {
+                    Console.WriteLine("Operation sucess");
+                    break;
+                }
+            }
+        }
 
 
 
