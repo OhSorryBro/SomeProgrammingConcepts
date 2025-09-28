@@ -45,7 +45,7 @@ namespace SomeProgrammingConcepts
         //8. Retry logic
         //Write a method Retry(Func<bool> operation, int attempts),
         //which tries to execute operation up to attempts times until it returns true.
-        public void Retry(Func<bool> operation, int attempts)
+        public void Retry(Func<bool> operation, int attempts, Func<int, int> parameter)
         {
             for (int i = 0; i < attempts; i++)
             {
@@ -57,6 +57,11 @@ namespace SomeProgrammingConcepts
                     break;
                 }
             }
+        }
+
+        public int WaitStrategy1(int attempt)
+        {
+            return attempt * 1000;
         }
         public bool UnreliableOperation()
         {

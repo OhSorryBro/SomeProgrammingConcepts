@@ -96,21 +96,37 @@ namespace SomeProgrammingConcepts
         //Add a delay between retries.
 
 
-        //MIKE TO_DO: add delay
-        public void RetryWithDelay(Func<bool> operation, int attempts, Func<int, int> parameter)
+
+
+        public void RetryWithDelay(Func<bool> operation, int attempts, Func<int, int> retryStrategy)
         {
             for (int i = 0; i < attempts; i++)
             {
+                int delay = retryStrategy(i);
                 bool sucess = operation();
-                Console.WriteLine($"Attempt {i + 1}: {(sucess == true ? "Sucess" : "Fail")}");
                 if (sucess == true)
                 {
                     Console.WriteLine("Operation sucess");
                     break;
                 }
+                else
+                {
+                    Console.WriteLine("Waiting: " + delay);
+                    System.Threading.Thread.Sleep(delay);
+                }
             }
         }
 
+        public int WaitStrategy1(int attempt)
+        {
+            return attempt * 1000;
+        }
+        public bool UnreliableOperation()
+        {
+            int var1 = 3;
+            int var2 = 5;
+            return var1 > var2;
+        }
 
 
         //4. Batch processor

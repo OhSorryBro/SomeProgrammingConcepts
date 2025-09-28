@@ -28,7 +28,7 @@ public class Program
 
 
         //3. Retry with delay
-
+        di.RetryWithDelay(di.UnreliableOperation, 5, di.WaitStrategy1);
 
         /*
         //7. Validation
