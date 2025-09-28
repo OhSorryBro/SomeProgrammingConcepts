@@ -133,6 +133,33 @@ namespace SomeProgrammingConcepts
         //Write a method ProcessInBatches<T> that takes a list of items, an int batchSize, and an Action<List<T>>.
         //Split the list into batches and invoke the action on each batch.
 
+        public void ProcessInBatches<T>(IEnumerable<T> items, int batchSize, Action<List<T>> processBatch)
+        {
+            List<T> batch = new List<T>();
+            foreach (var item in items)
+            {
+                batch.Add(item);
+                if (batch.Count == batchSize)
+                {
+                    processBatch(batch);
+                    batch.Clear();
+                    System.Threading.Thread.Sleep(batchSize * 1000); // Simulate some processing time
+                }
+            }
+            if (batch.Count > 0)
+            {
+                processBatch(batch);
+                Console.WriteLine("Final batch processed.");
+            }
+        }
+        public void PrintBatch<T>(List<T> batch)
+        {
+            Console.WriteLine("Processing batch:");
+            foreach (var item in batch)
+            {
+                Console.WriteLine(item);
+            }
+        }
 
 
 

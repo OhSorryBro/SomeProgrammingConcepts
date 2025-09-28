@@ -30,6 +30,11 @@ public class Program
         //3. Retry with delay
         di.RetryWithDelay(di.UnreliableOperation, 5, di.WaitStrategy1);
 
+        //4. Batch processor
+
+        di.ProcessInBatches<int>(new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 3, di.PrintBatch);
+
+
         /*
         //7. Validation
         RealDelegates3 rd3 = new RealDelegates3();
