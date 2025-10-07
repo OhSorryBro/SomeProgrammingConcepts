@@ -167,6 +167,22 @@ namespace SomeProgrammingConcepts
         //Write a method RunInParallel<T> that takes a list of Func<T> and returns a List<T> of results.
         //Execute all functions in parallel using Task.WhenAll.
 
+        public async Task<List<T>> RunInParallel<T>(IEnumerable<Func<T>> functions)
+        {
+            List<Task<T>> tasks = new List<Task<T>>();
+
+            List<T> results = new List<T>();
+            foreach (var func in functions)
+            {
+                tasks.Add(Task.Run(func));
+            }
+            await Task.WhenAll(tasks);
+            foreach (var task in tasks)
+            {
+                results.Add(task.Result);
+            }
+            return results;
+        }
 
 
 
