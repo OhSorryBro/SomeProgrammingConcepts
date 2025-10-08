@@ -171,20 +171,39 @@ namespace SomeProgrammingConcepts
         {
             List<Task<T>> tasks = new List<Task<T>>();
 
-            List<T> results = new List<T>();
             foreach (var func in functions)
             {
                 tasks.Add(Task.Run(func));
             }
-            await Task.WhenAll(tasks);
-            foreach (var task in tasks)
-            {
-                results.Add(task.Result);
-            }
+            var resultsArray =  await Task.WhenAll(tasks);
+            List<T> results = resultsArray.ToList();
             return results;
         }
+        public int DivisorCount(int n)
+        {
+            int count = 0;
+            for (int i = 1; i <= n;i++)
+            {
+                if (n % i == 0)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        // Example functions for testing
 
+        //Func<int> calc1 = () => DivisorCount(50000000);
+        Func<int> calc2 = () => FactorialDigitCount(20);
+        Func<int> calc3 = () => IsPrime(2147483647) ? 1 : 0;
+        Func<int> calc4 = () => Fibonacci(35);
+        Func<int> calc5 = () => SumOfRoots(1000000);
 
+        // more realistic functions
+
+        Func<List<Order>> getOrders = () => GetOrdersFromReflex();
+        Func<List<Transport>> getTransports = () => GetTransportsFromTMS();
+        Func<List<Invoice>> getInvoices = () => GetInvoicesFromSAP();
 
         //6. Pipeline with branching
         //Extend your pipeline so that it accepts a Func<int,bool> as a condition.

@@ -34,6 +34,9 @@ public class Program
 
         di.ProcessInBatches<int>(new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 3, di.PrintBatch);
 
+        // 5. Parallel execution
+
+        Func<int> calc1 = () => di.DivisorCount(50000000);
 
         /*
         //7. Validation
