@@ -191,19 +191,78 @@ namespace SomeProgrammingConcepts
             }
             return count;
         }
+        public int IsPrime(int n)
+        {
+            if (n < 2) return 0;               
+            if (n == 2) return 1;               
+            if (n % 2 == 0) return 0;          
+            int limit = (int)Math.Sqrt(n);
+            for (int i = 3; i <= limit; i += 2)    
+            {
+                if (n % i == 0)
+                    return 0;                  
+            }
+            return 1;                           
+        }
+
+        public int FactorialDigitCount(int n)
+        {
+            if (n < 0) return 0;            // brak sensu dla liczb ujemnych
+            if (n <= 1) return 1;           // 0! i 1! = 1 → 1 cyfra
+
+            double sum = 0;
+            for (int i = 2; i <= n; i++)
+            {
+                sum += Math.Log10(i);
+            }
+
+            return (int)Math.Floor(sum) + 1;
+        }
+
+        public void PrintResults<T>(List<T> results)
+        {
+            foreach (var result in results)
+            {
+                Console.WriteLine("Result from parallel execution: " + result);
+            }
+        }
+
+        public int GetOrdersFromReflex()
+        {
+            System.Threading.Thread.Sleep(2000);
+            // Simulate delay
+            Random Random = new Random();
+            int result = Random.Next(1, 100);
+            return result;
+        }
+        public int GetTransportsFromTMS()
+        {
+            System.Threading.Thread.Sleep(3140);
+            // Simulate delay
+            Random Random = new Random();
+            int result = Random.Next(1, 100);
+            return result;
+        }
+
+        public int GetInvoicesFromSAP()
+        {
+            System.Threading.Thread.Sleep(8321);
+            Random Random = new Random();
+            int result = Random.Next(1, 100);
+            return result;
+        }
         // Example functions for testing
 
         //Func<int> calc1 = () => DivisorCount(50000000);
-        Func<int> calc2 = () => FactorialDigitCount(20);
-        Func<int> calc3 = () => IsPrime(2147483647) ? 1 : 0;
-        Func<int> calc4 = () => Fibonacci(35);
-        Func<int> calc5 = () => SumOfRoots(1000000);
+        //Func<int> calc2 = () => FactorialDigitCount(20);
+        //Func<int> calc3 = () => IsPrime(2147483647) ? 1 : 0;
+
 
         // more realistic functions
 
-        Func<List<Order>> getOrders = () => GetOrdersFromReflex();
-        Func<List<Transport>> getTransports = () => GetTransportsFromTMS();
-        Func<List<Invoice>> getInvoices = () => GetInvoicesFromSAP();
+        // Func<List<Order>> getOrders = () => GetOrdersFromReflex();
+        // Func<List<Transport>> getTransports = () => GetTransportsFromTMS();
+        // Func<List<Invoice>> getInvoices = () => GetInvoicesFromSAP();
 
         //6. Pipeline with branching
         //Extend your pipeline so that it accepts a Func<int,bool> as a condition.

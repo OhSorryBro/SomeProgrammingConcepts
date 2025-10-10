@@ -37,7 +37,17 @@ public class Program
         // 5. Parallel execution
 
         Func<int> calc1 = () => di.DivisorCount(50000000);
+        Func<int> calc2 = () => di.FactorialDigitCount(20);
+        Func<int> calc3 = () => di.IsPrime(2147483647);
+        var results = di.RunInParallel(new List<Func<int>>() { calc1, calc2, calc3 });
+        di.PrintResults<int>(results.Result);
 
+        // More realistic functions
+        Func<int> getOrders = () => di.GetOrdersFromReflex();
+        Func<int> getTransports = () => di.GetTransportsFromTMS();
+        Func<int> getInvoices = () => di.GetInvoicesFromSAP();
+        var results2 = di.RunInParallel(new List<Func<int>>() { getOrders, getTransports, getInvoices });
+        di.PrintResults<int>(results2.Result);
         /*
         //7. Validation
         RealDelegates3 rd3 = new RealDelegates3();
