@@ -12,42 +12,59 @@ public class Program
 
     public static void Main(string[] args)
     {
-        //Intermediate Delegates tasks
-        //1. Custom Where with logging
+        ////Intermediate Delegates tasks
+        ////1. Custom Where with logging
 
         Delegates_Intermediate di = new Delegates_Intermediate();
-        List<int> FilteredWithLogResult = di.FilterWithLog<int>(new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, di.isEven, di.PrintItem);
-        di.PrintList<int>(FilteredWithLogResult);
+        //List<int> FilteredWithLogResult = di.FilterWithLog<int>(new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, di.isEven, di.PrintItem);
+        //di.PrintList<int>(FilteredWithLogResult);
 
 
-        //2. Map & Reduce
-        List<string> strings = new List<string>();
-        strings.AddRange( new[] { "apple", "banana", "cherry", "laptop" });
+        ////2. Map & Reduce
+        //List<string> strings = new List<string>();
+        //strings.AddRange( new[] { "apple", "banana", "cherry", "laptop" });
 
-        di.PrintFromReduce(di.MapReduce(strings, di.CountChars, di.Sum));
+        //di.PrintFromReduce(di.MapReduce(strings, di.CountChars, di.Sum));
 
 
-        //3. Retry with delay
-        di.RetryWithDelay(di.UnreliableOperation, 5, di.WaitStrategy1);
+        ////3. Retry with delay
+        //di.RetryWithDelay(di.UnreliableOperation, 5, di.WaitStrategy1);
 
-        //4. Batch processor
+        ////4. Batch processor
 
-        di.ProcessInBatches<int>(new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 3, di.PrintBatch);
+        //di.ProcessInBatches<int>(new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 3, di.PrintBatch);
 
-        // 5. Parallel execution
+        //// 5. Parallel execution
 
-        Func<int> calc1 = () => di.DivisorCount(50000000);
-        Func<int> calc2 = () => di.FactorialDigitCount(20);
-        Func<int> calc3 = () => di.IsPrime(2147483647);
-        var results = di.RunInParallel(new List<Func<int>>() { calc1, calc2, calc3 });
-        di.PrintResults<int>(results.Result);
+        //Func<int> calc1 = () => di.DivisorCount(50000000);
+        //Func<int> calc2 = () => di.FactorialDigitCount(20);
+        //Func<int> calc3 = () => di.IsPrime(2147483647);
+        //var results = di.RunInParallel(new List<Func<int>>() { calc1, calc2, calc3 });
+        //di.PrintResults<int>(results.Result);
 
-        // More realistic functions
-        Func<int> getOrders = () => di.GetOrdersFromReflex();
-        Func<int> getTransports = () => di.GetTransportsFromTMS();
-        Func<int> getInvoices = () => di.GetInvoicesFromSAP();
-        var results2 = di.RunInParallel(new List<Func<int>>() { getOrders, getTransports, getInvoices });
-        di.PrintResults<int>(results2.Result);
+        //// More realistic functions
+        //Func<int> getOrders = () => di.GetOrdersFromReflex();
+        //Func<int> getTransports = () => di.GetTransportsFromTMS();
+        //Func<int> getInvoices = () => di.GetInvoicesFromSAP();
+        //var results2 = di.RunInParallel(new List<Func<int>>() { getOrders, getTransports, getInvoices });
+        //di.PrintResults<int>(results2.Result);
+
+        //6. Pipeline with branching
+        List<Func<int, int>> steps = new List<Func<int, int>>()
+        {
+            di.Add2,
+            di.MultiplyBy3
+        };
+        List<Func<int, int>> altSteps = new List<Func<int, int>>()
+        {
+            di.MultiplyBy3,
+            di.Add2
+        };
+        di.RunPipeLineWithBranching(500, di.IsLessThan100, steps, altSteps, di.OutputResult);
+
+
+
+
         /*
         //7. Validation
         RealDelegates3 rd3 = new RealDelegates3();

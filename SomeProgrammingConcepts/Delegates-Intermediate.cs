@@ -269,7 +269,36 @@ namespace SomeProgrammingConcepts
         //If the condition returns true, continue normally; if false, skip to an alternative list of steps.
 
 
+        public List<Func<int, int>> steps;
+        public void RunPipeLineWithBranching(int input, Func<int,bool> condition, List<Func<int, int>> steps, List<Func<int, int>> alternativeSteps, Action<int> output)
+        {
+            int result = input;
+            bool conditionReuslt = condition(input);
+            if (conditionReuslt == true)
+            {
+                foreach (var step in steps)
+                {
+                    result = step(result);
+                }
 
+            }
+            else
+            {
+                foreach (var step in alternativeSteps)
+                {
+                    result = step(result);
+                }
+            }
+            output(result);
+        }
+        public int Add2(int x) { return x + 2; }
+        public int MultiplyBy3(int x) { return x * 3; }
+        public void OutputResult(int result)
+        {
+            Console.WriteLine($"Final result: {result}");
+
+        }
+        public bool IsLessThan100(int x) { return x < 100; }
 
         //7. Validator collection
         //Create a class Validator<T> that holds a list of Func<T, bool>.
