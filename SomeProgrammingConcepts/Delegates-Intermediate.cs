@@ -360,12 +360,32 @@ namespace SomeProgrammingConcepts
         }
 
             
-
+         
             //9. Command dispatcher
             //Implement a class CommandDispatcher where you can register commands (string → Action).
-            //Add a method Dispatch(string command) that triggers the right action, or reports that the command does not exist.
+            //Add a method Dispatch(string command) that triggers the right action, or reports that
+            //the command does not exist.
 
-
+            public class CommandDispatcher
+            {
+                private readonly Dictionary<string, Action> commands = new();
+                public void RegisterCommand(string commandName, Action commandAction)
+                {
+                    commands[commandName] = commandAction;
+                }
+                public void Dispatch(string commandName)
+                {
+                    if (commands.TryGetValue(commandName, out var action))
+                    {
+                        action();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Command '{commandName}' does not exist.");
+                    }
+            }
+        }
+            
 
 
             //10. Dynamic calculator
