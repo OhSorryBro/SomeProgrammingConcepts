@@ -304,31 +304,53 @@ namespace SomeProgrammingConcepts
         //Create a class Validator<T> that holds a list of Func<T, bool>.
         //Add a method ValidateAll(T value) that returns a list of messages indicating which validations failed.
 
+        public class Validator<T>
+        {
+            private List<Func<T, bool>> validators = new List<Func<T, bool>>();
+            public void AddValidator(Func<T, bool> validator)
+            {
+                validators.Add(validator);
+            }
+
+            public List<string> ValidateAll(T value)
+            {
+                List<string> result = new List<string>();
+                int counter = 0;
+                foreach (var validation in this.validators)
+                {
+                    counter++;
+                    if (!validation(value))
+                    {
+                        result.Add($"Validation number: {counter}. {value} has NOT matched the validation");
+                    }
+                }
+                return result;
+            }
+        }
+
+
+            //8. Transform and side-effect
+            //Write a method TransformWithSideEffect<T, U> that takes a T input, a Func<T, U> transformer, an Action<T> before, and an Action<U> after.
+            //It should:
+            //Run the before action on the input,
+            //Transform the input,
+            //Run the after action on the result.
 
 
 
-        //8. Transform and side-effect
-        //Write a method TransformWithSideEffect<T, U> that takes a T input, a Func<T, U> transformer, an Action<T> before, and an Action<U> after.
-        //It should:
-        //Run the before action on the input,
-        //Transform the input,
-        //Run the after action on the result.
-
-
-
-        //9. Command dispatcher
-        //Implement a class CommandDispatcher where you can register commands (string → Action).
-        //Add a method Dispatch(string command) that triggers the right action, or reports that the command does not exist.
+            //9. Command dispatcher
+            //Implement a class CommandDispatcher where you can register commands (string → Action).
+            //Add a method Dispatch(string command) that triggers the right action, or reports that the command does not exist.
 
 
 
 
-        //10. Dynamic calculator
-        //Write a class Calculator that stores a dictionary of operators (Dictionary<string, Func<int, int, int>>).
-        //Add a method Calculate(string op, int a, int b) that finds the delegate and executes it.
-        //Register operators like "+", "-", "*", "/".
+            //10. Dynamic calculator
+            //Write a class Calculator that stores a dictionary of operators (Dictionary<string, Func<int, int, int>>).
+            //Add a method Calculate(string op, int a, int b) that finds the delegate and executes it.
+            //Register operators like "+", "-", "*", "/".
 
 
 
+        }
     }
-}
