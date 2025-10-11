@@ -329,14 +329,37 @@ namespace SomeProgrammingConcepts
         }
 
 
-            //8. Transform and side-effect
-            //Write a method TransformWithSideEffect<T, U> that takes a T input, a Func<T, U> transformer, an Action<T> before, and an Action<U> after.
-            //It should:
-            //Run the before action on the input,
-            //Transform the input,
-            //Run the after action on the result.
+        //8. Transform and side-effect
+        //Write a method TransformWithSideEffect<T, U> 
+        //that takes a T input, a Func<T, U> transformer, an Action<T> before, and an Action<U> after.
+        //It should:
+        //Run the before action on the input,
+        //Transform the input,
+        //Run the after action on the result.
+        public class Transformator<T,U>
+        {
+            private readonly List<T> beforevalues = new();
+            private readonly List<U> aftervalues = new();
+            internal void AddToBefore(T value)
+            {
+                beforevalues.Add(value);
+            }
+            internal void AddToAfter(U value)
+            {
+                aftervalues.Add(value);
+            }
+            public U TransformWithSideEffect(T input, Func<T, U> transformer, Action<T> before, Action<U> after)
+            {
+                before(input);
+                U result = transformer(input);
+                after(result);
+                return result;
+            }
+            public IReadOnlyList<T> BeforeValues => beforevalues;
+            public IReadOnlyList<U> AfterValues => aftervalues;
+        }
 
-
+            
 
             //9. Command dispatcher
             //Implement a class CommandDispatcher where you can register commands (string → Action).
