@@ -45,10 +45,15 @@ namespace SomeProgrammingConcepts
         {
             Console.WriteLine($"Item {item} was filtered out.");
         }
+
+        public void PrintItemΛ<T>(T item) => Console.WriteLine($"Item {item} was filtered out.");
+
         public bool isEven(int number)
         {
             return number % 2 == 0;
         }
+
+        public bool iSEvenΛ(int number) => number % 2 == 0;
         public void PrintList<T>(List<T> items)
         {
             foreach (var item in items)
@@ -57,6 +62,7 @@ namespace SomeProgrammingConcepts
             }
         }
 
+        public void PrintListΛ<T>(List<T> items) => items.ForEach(item => Console.WriteLine($"What has not been filtered out: " + item));
 
 
 
@@ -80,15 +86,21 @@ namespace SomeProgrammingConcepts
             return str.Length;
         }
 
+        public int CountCharsΛ(string str) => str.Length;
+
         public int Sum(int a, int b)
         {
             return a + b;
         }
 
+        public int SumΛ(int a, int b) => a + b;
+
         public void PrintFromReduce<U>(U item)
         {
             Console.WriteLine($"Result from Reduce: " + item);
         }
+
+        public void PrintFromReduceΛ<U>(U item) => Console.WriteLine($"Result from Reduce: " + item);
 
         //3. Retry with delay
         //Extend your Retry method so it accepts an additional Func<int, int> parameter — a delay strategy
@@ -121,6 +133,8 @@ namespace SomeProgrammingConcepts
         {
             return attempt * 1000;
         }
+
+        public int WaitStrategy1Λ(int attempt) => attempt * 1000;
         public bool UnreliableOperation()
         {
             int var1 = 3;
@@ -227,6 +241,8 @@ namespace SomeProgrammingConcepts
             }
         }
 
+        public void PrintResultsΛ<T>(List<T> results) => results.ForEach(results => Console.WriteLine("Result from parallel execution: " + results));
+
         public int GetOrdersFromReflex()
         {
             System.Threading.Thread.Sleep(2000);
@@ -292,13 +308,17 @@ namespace SomeProgrammingConcepts
             output(result);
         }
         public int Add2(int x) { return x + 2; }
+        public int Add2Λ(int x) => x + 2;
         public int MultiplyBy3(int x) { return x * 3; }
+        public int MultiplyBe3Λ(int x) => x * 3;
         public void OutputResult(int result)
         {
             Console.WriteLine($"Final result: {result}");
 
         }
+        public void OutputResultΛ(int result) => Console.WriteLine($"Final result: {result}");
         public bool IsLessThan100(int x) { return x < 100; }
+        public bool IsLessThan100Λ(int x) => x < 100;
 
         //7. Validator collection
         //Create a class Validator<T> that holds a list of Func<T, bool>.
@@ -344,10 +364,12 @@ namespace SomeProgrammingConcepts
             {
                 beforevalues.Add(value);
             }
+            internal void AddToBeforeΛ(T value) => beforevalues.Add(value);
             internal void AddToAfter(U value)
             {
                 aftervalues.Add(value);
             }
+            internal void AddToAfterΛ(U value) => aftervalues.Add(value);
             public U TransformWithSideEffect(T input, Func<T, U> transformer, Action<T> before, Action<U> after)
             {
                 before(input);
@@ -373,7 +395,9 @@ namespace SomeProgrammingConcepts
                 {
                     commands[commandName] = commandAction;
                 }
-                public void Dispatch(string commandName)
+
+                public void RegisterCommandΛ(string commandName, Action commandAction) => commands[commandName] = commandAction;
+            public void Dispatch(string commandName)
                 {
                     if (commands.TryGetValue(commandName, out var action))
                     {

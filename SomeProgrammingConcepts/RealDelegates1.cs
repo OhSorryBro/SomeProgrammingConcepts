@@ -40,6 +40,7 @@ namespace SomeProgrammingConcepts
                 Console.WriteLine(number);
             }
         }
+        public void PrintListΛ(List<int> numbers) => numbers.ForEach(Console.WriteLine);
 
 
         //2.  Transforming a list
@@ -69,17 +70,22 @@ namespace SomeProgrammingConcepts
                 action(number);
             }
         }
+        public void PerformActionΛ(List<int> numbers, Action<int> action) => numbers.ForEach(action);
         public void PrintNumber(int number)
         {
             Console.WriteLine(number);
         }
+        public void PrintNumberΛ(int number) => Console.WriteLine(number);
+        Func<int,int> x = xa => 2 * 3;
+        Func<int, int> ya = y => y + 3;
 
         public void PrintNumberTwice(int number)
         {
             Console.WriteLine(number);
             Console.WriteLine(number);
         }
-
+        public void PrintNumberTwiceΛ(int number) => Console.WriteLine(number);
+        
 
     }
 }

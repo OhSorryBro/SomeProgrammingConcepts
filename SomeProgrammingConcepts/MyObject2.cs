@@ -12,6 +12,7 @@ namespace SomeProgrammingConcepts
         {
             Console.WriteLine($"MyObject2 Print Method {msg}");
         }
+        public void PrintΛ(string msg) => Console.WriteLine($"MyObject2 PrintΛ Method {msg}");
         public MyObject2(Simulation simulation)
         {
             simulation.a += Print;

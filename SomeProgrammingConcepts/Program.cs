@@ -12,6 +12,12 @@ public class Program
 
     public static void Main(string[] args)
     {
+
+
+
+
+
+        /*
         ////Intermediate Delegates tasks
         ////1. Custom Where with logging
 
@@ -61,7 +67,7 @@ public class Program
             di.Add2
         };
         di.RunPipeLineWithBranching(500, di.IsLessThan100, steps, altSteps, di.OutputResult);
-
+        */
 
 
 
