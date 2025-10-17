@@ -25,6 +25,8 @@ Define delegate void MyPrinter(string msg);
             Console.WriteLine($"Hello, {msg}");
         }
 
+        public void PrintΛ(string msg) => Console.WriteLine($"Hello, {msg}");
+
 
         /*
 2. Addition and Multiplication
@@ -36,8 +38,9 @@ Define delegate int Operation(int a, int b);
         public int Add(int a, int b)
         {
             Console.WriteLine(a + b);
-                return a+b;
+            return a + b;
         }
+
         public int Multiply(int a, int b)
         {
             Console.WriteLine(a * b);

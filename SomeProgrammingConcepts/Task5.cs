@@ -21,18 +21,22 @@ namespace SomeProgrammingConcepts
         {
             return a + b;
         }
+        public int AddΛ(int a, int b) => a + b;
         public int Subtract(int a, int b)
         {
             return a - b;
         }
+        public int Subtract(int a, int b) => a - b;
         public int Multiply(int a, int b)
         {
             return a * b;
         }
+        public int Multiply(int a, int b) => a * b;
         public int Division(int a, int b)
         {
             return a / b;
         }
+        public int DivisionΛ(int a, int b) => a / b;
 
 
 
@@ -61,10 +65,12 @@ namespace SomeProgrammingConcepts
         {
             return a * 2;
         }
+        public int DoubleΛ(int a) => a * 2;
         public void PrintStars(int a)
         {
             Console.WriteLine(a * '*');
         }
+        public void PrintStartΛ(int a) => Console.WriteLine(a * '*');
 
     }
 }

@@ -21,11 +21,16 @@ namespace SomeProgrammingConcepts
         {
             Console.WriteLine($"Log to console: {msg}");
         }
+        public void LogToConsoleΛ(string msg) => Console.WriteLine($"Log to console: {msg}");
+
+
         public List<string> logList = new List<string>();
         public void LogToList(string msg)
         {
             logList.Add(msg);
         }
+
+        public void LogToListΛ(string msg) => logList.Add(msg);
         public void PrintLogToList()
         {
             foreach (string log in logList)
@@ -33,6 +38,8 @@ namespace SomeProgrammingConcepts
                 Console.WriteLine("Log from list: " + log);
             }    
         }
+
+        public void PrintLogToListΛ() => logList.ForEach(log => Console.WriteLine("Log from list: " + log));
         /*
     4.  Clock event
         Create a Clock class that every 2 seconds invokes a delegate Action<int> with the current tick.
@@ -56,6 +63,8 @@ namespace SomeProgrammingConcepts
         {
             Console.WriteLine($"Clock is at it's {tick}");
         }
+
+        public void ClockLogToConsoleΛ(int tick) => Console.WriteLine($"Clock is at it's {tick}");
         public int totalElapsedTime = 0;
         public void ClockCountElapsedTime(int tick)
         {

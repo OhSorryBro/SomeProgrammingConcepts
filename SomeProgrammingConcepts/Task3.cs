@@ -21,29 +21,35 @@ namespace SomeProgrammingConcepts
         {
             return a + b;
         }
+        public int AddΛ(int a, int b) => a + b;
         public int Subtract(int a, int b)
         {
             return a - b;
         }
+        public int SubtractΛ(int a, int b) => a - b;
         public int Multiply(int a, int b)
         {
             return a * b;
         }
+        public int MultiplyΛ(int a, int b) => a * b;
         public int Max(int a, int b)
         {
             return Math.Max(a, b);
         }
+        public int MaxΛ(int a, int b) => Math.Max(a, b);
 
         public int RunOperation(int a, int b, Operation o)
         {
             return o(a, b)
                 ;
         }
+        public int RunOperationΛ(int a, int b, Operation o) => o(a, b);
 
         public void PrintResult(int Result, Operation o)
         {
             Console.WriteLine($"Result of {o.Method.Name}: {Result}");
         }
+        PrintResultΛ(int Result, Operation o) => Console.WriteLine($"Result of {o.Method.Name}: {Result}");
 
 
         /*
@@ -71,18 +77,22 @@ namespace SomeProgrammingConcepts
         {
             return x % 2 == 0;
         }
+        public bool IsEvenΛ(int x) => x % 2 == 0;
         public bool IsGreaterThan10(int x)
         {
             return x > 10;
         }
+        public bool IsGreaterThan10Λ(int x) => x > 10;
         public bool IsDivisibleBy3(int x)
         {
             return x % 3 == 0;
         }
+        public bool IsDivisibleBy3Λ(int x) => x % 3 == 0;
 
         public void PrintFilteredList(List<int> filteredNumbers)
         {
             Console.WriteLine("Filtered numbers: " + string.Join(", ", filteredNumbers));
         }
+        public void PrintFilteredListΛ(List<int> filteredNumbers) => Console.WriteLine("Filtered numbers: " + string.Join(", ", filteredNumbers));
     }
 }
