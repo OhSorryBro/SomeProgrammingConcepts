@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -22,19 +23,37 @@ namespace SomeProgrammingConcepts
             // Exercise 1 – Anonymous methods → lambdas
             Func<int, int> square = delegate (int x) { return x * x; };
             Func<int, int> squareΛ = x => x * x;
+
             Func<int, bool> isOdd = delegate (int x) { return x % 2 != 0; };
             Func<int, bool> isOddΛ = x => x % 2 != 0;
+
             Action<string> print = delegate (string s) { Console.WriteLine(s); };
             Action<string> printΛ = s => Console.WriteLine(s);
 
+
+
             // Exercise 2 – Named method → inline lambda
             bool IsShort(string s) { return s.Length < 5; }
+            bool IsShortΛ(string s) => s.Length < 5;
 
             var names = new[] { "Ann", "Robert", "Ewa", "Tom" };
             var shortOnes = names.Where(IsShort);
+            var shortOnesΛ = names.Where(IsShortΛ);
+
+
+
 
             // Exercise 3 – Multi-parameter lambda
-            Func<int, int, int> max = delegate (int a, int b) { if (a > b) return a; else return b; };
+            Func<int, int, int> max = delegate (int a, int b) 
+            { if (a > b) return a; else return b; };
+
+            Func<int, int, int> maxΛ = (int a, int b) =>
+            {
+                if (a > b) { return a; }
+                else { return b; }
+            };
+
+
 
             // Exercise 4 – Statement lambda (multi-line)
             Func<int, int> fib = delegate (int n)
