@@ -1,10 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Numerics;
+using System.Runtime.Intrinsics.X86;
+using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SomeProgrammingConcepts
 {
@@ -82,6 +91,91 @@ namespace SomeProgrammingConcepts
 
             var nums = Enumerable.Range(50, 100);
             var expensive = nums.Where(Expensive);
+
+
+            bool ExpensiveΛ(int x) => x > 100;
+            var expensiveΛ = nums.Where(ExpensiveΛ);
+            var expensiveΛ2 = nums.Where(x=> x > 100);
+
+            // Exercise 5a – Named Predicate: Even Numbers
+
+            //Create a named method that checks if a number is even.
+            //Use it inside.Where() to return only even numbers from a sequence 1–50.
+            // Example:
+            // bool IsEven(int x) => x % 2 == 0;
+            // var evens = Enumerable.Range(1, 50).Where(IsEven);
+
+
+
+
+
+
+            // Exercise 5b – Inline Lambda Predicate: Odd Numbers
+
+            //Write the same filter but as an inline lambda expression instead of a named method.
+            //Return all odd numbers from 1–30.
+            // Example:
+            // var odds = Enumerable.Range(1, 30).Where(x => x % 2 != 0);
+
+
+
+
+            // Exercise 5c – Complex Predicate: Range Filter
+
+            //Filter numbers between inclusive 20 and 80 using a named method predicate.
+            //Name it InRange.
+            // bool InRange(int x) => x >= 20 && x <= 80;
+            // var inRange = Enumerable.Range(1, 100).Where(InRange);
+
+
+
+
+            // Exercise 5d – Reusable Predicate: Custom Filter Function
+
+            //Write a reusable method:
+            IEnumerable<int> Filter(Func<int, bool> predicate, IEnumerable<int> source)
+            // Use it twice:
+            // once with a named predicate that filters numbers > 50,
+            //once with a lambda that filters numbers < 10.
+            // var above50 = Filter(x => x > 50, Enumerable.Range(1,100));
+            // var below10 = Filter(x => x < 10, Enumerable.Range(1,100));
+
+
+
+
+            // Exercise 5e – Predicate Composition
+
+            //Combine two predicates(e.g., IsEven and GreaterThanTen)
+            //to create a new filter that finds numbers satisfying both.
+            // bool IsEven(int x) => x % 2 == 0;
+            // bool GreaterThanTen(int x) => x > 10;
+            // var combined = Enumerable.Range(1, 30)
+            //                          .Where(x => IsEven(x) && GreaterThanTen(x));
+
+
+
+
+
+
+            // Exercise 5f – Filtering Objects with Predicate
+
+            //Create a small list of Product objects with properties Name and Price.
+            //Write:
+            // A named predicate ExpensiveProduct(price > 20).
+            //A lambda predicate for ShortName(name length < 5).
+            //Then combine them in a single LINQ chain.
+            // var products = new List<Product> {
+            //     new("Milk", 2.5m), new("Cheese", 15m),
+            //     new("Butter", 22m), new("Bread", 4m)
+            // };
+
+            // bool ExpensiveProduct(Product p) => p.Price > 20;
+            // var filtered = products.Where(ExpensiveProduct)
+            //                        .Where(p => p.Name.Length < 5);
+
+
+
+
 
             // Exercise 6 – SelectMany with a named method
             IEnumerable<char> ToChars(string s) { return s.ToCharArray(); }
