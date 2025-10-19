@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -8,11 +9,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Numerics;
+using System.Reflection;
 using System.Runtime.Intrinsics.X86;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using static SomeProgrammingConcepts.ΛExpressions;
@@ -296,15 +299,18 @@ namespace SomeProgrammingConcepts
             //Sort them by Price(descending) and then by Name(ascending).
             //Use lambda expressions as key selectors for both OrderByDescending and ThenBy.
 
-            List<Order> listOfOrders2 = new List<Order>();
-            listOfOrders.Add(new Order { Ordered = new[] { "Milk", "Apple" } });
-            listOfOrders.Add(new Order { Ordered = new[] { "Milk2", "Apple2" } });
+            var products2 = new List<Product>
+            {
+                new("milk", 2), new ("Cheese",15)
+            };
 
-
+            products2.OrderByDescending(p => p.Number)
+                .ThenBy(n=>n.Name);
 
             // Exercise 8 – Join with key selectors and result selector
             var left = new[] { new { Id = 1, Name = "A" }, new { Id = 2, Name = "B" } };
-            var right = new[] { new { Id = 10, LId = 1 }, new { Id = 11, LId = 1 }, new { Id = 12, LId = 2 } };
+            var right = new[] { new { Id = 10, LId = 1 }, new { Id = 11, LId = 1 }, 
+                new { Id = 12, LId = 2 } };
 
             int LeftKey(dynamic x) { return x.Id; }
             int RightKey(dynamic y) { return y.LId; }
@@ -315,6 +321,41 @@ namespace SomeProgrammingConcepts
                 RightKey,
                 delegate (dynamic l, dynamic r) { return new { L = l.Name, R = r.Id }; }
             );
+
+            // Exercise 8a – Inner Join with Custom Result Selector
+            //Perform an inner join between left and right collections on Id ↔ LId.
+            //In the result selector, return an anonymous object with:
+            //LeftName = the Name from left,
+            //RightId = the Id from right,
+            //Pair = concatenation of Name +"-" + Id(from right).
+            //Use key selectors as in the original example.
+
+
+
+
+
+
+            //  Exercise 8b – Join with Filtering and Sorting
+            //Perform the same join as in 8a, then:
+            //filter out pairs where RightId(from right) is even,
+            //sort the result ascending by LeftName, and within that, ascending by RightId.
+            //Return anonymous objects { LeftName, RightId }.
+
+
+
+
+
+            // Exercise 8c – Group Join and Aggregation
+            //Join left and right on Id ↔ LId, then group the results by LeftName from left.
+            //For each group, return an anonymous object with:
+            //Name = LeftName,
+            //RightIds = collection of all related Id values from right(no duplicates),
+            //Count = number of matching right records for that name.
+            //Finally, sort the groups in descending order by Count.
+
+
+
+
 
             // Exercise 9 – Query syntax → Method syntax
             var q =
