@@ -19,6 +19,17 @@ namespace SomeProgrammingConcepts
 {
     internal class ΛExpressions
     {
+        public class Product
+        {
+            public string Name;
+            public int Number;
+
+            public Product(string name, int number)
+            {
+                Name = name;
+                Number = number;
+            }
+        }
         private class FirstCharComparer : IEqualityComparer<string>
         {
             public bool Equals(string? x, string? y) =>
@@ -101,13 +112,14 @@ namespace SomeProgrammingConcepts
 
             //Create a named method that checks if a number is even.
             //Use it inside.Where() to return only even numbers from a sequence 1–50.
+
             // Example:
             // bool IsEven(int x) => x % 2 == 0;
             // var evens = Enumerable.Range(1, 50).Where(IsEven);
-
-
-
-
+            List<int> xaxa = [1, 2, 3];
+            bool namedMethodΛ(int x) => x % 2 == 0;
+            var evenNumers = xaxa.Where(namedMethodΛ);
+            var odds = Enumerable.Range(1, 30);
 
 
             // Exercise 5b – Inline Lambda Predicate: Odd Numbers
@@ -117,7 +129,7 @@ namespace SomeProgrammingConcepts
             // Example:
             // var odds = Enumerable.Range(1, 30).Where(x => x % 2 != 0);
 
-
+            var oddnumbersΛ = odds.Where(x => x % 2 != 0);
 
 
             // Exercise 5c – Complex Predicate: Range Filter
@@ -127,21 +139,30 @@ namespace SomeProgrammingConcepts
             // bool InRange(int x) => x >= 20 && x <= 80;
             // var inRange = Enumerable.Range(1, 100).Where(InRange);
 
+            bool inRangeΛ(int x) => x >= 20 && x <= 80;
+            var inRange = xaxa.Where(inRangeΛ);
 
 
 
             // Exercise 5d – Reusable Predicate: Custom Filter Function
 
             //Write a reusable method:
-            IEnumerable<int> Filter(Func<int, bool> predicate, IEnumerable<int> source)
+            static IEnumerable<int> Filter
+                (Func<int, bool> predicate, IEnumerable<int> source)
+            {
+                foreach (var item in source)
+                    if (predicate(item))
+                        yield return item;
+            }
+            ;
             // Use it twice:
             // once with a named predicate that filters numbers > 50,
             //once with a lambda that filters numbers < 10.
             // var above50 = Filter(x => x > 50, Enumerable.Range(1,100));
             // var below10 = Filter(x => x < 10, Enumerable.Range(1,100));
 
-
-
+            var above50Λ = Filter(x => x > 50, xaxa);
+            var below10Λ = Filter(x => x < 10, xaxa);
 
             // Exercise 5e – Predicate Composition
 
@@ -152,7 +173,10 @@ namespace SomeProgrammingConcepts
             // var combined = Enumerable.Range(1, 30)
             //                          .Where(x => IsEven(x) && GreaterThanTen(x));
 
+            bool IsEvenΛ(int x) => x % 2 == 0;
+            bool GreaterThanTenΛ(int x) => x > 10;
 
+            var combinedΛ = xaxa.Where(x => IsEvenΛ(x)).Where(x=> GreaterThanTenΛ(x));
 
 
 
@@ -164,9 +188,12 @@ namespace SomeProgrammingConcepts
             // A named predicate ExpensiveProduct(price > 20).
             //A lambda predicate for ShortName(name length < 5).
             //Then combine them in a single LINQ chain.
-            // var products = new List<Product> {
-            //     new("Milk", 2.5m), new("Cheese", 15m),
-            //     new("Butter", 22m), new("Bread", 4m)
+
+
+
+            // var products = new list<product> {
+            //     new("milk", 2.5m), new("cheese", 15m),
+            //     new("butter", 22m), new("bread", 4m)
             // };
 
             // bool ExpensiveProduct(Product p) => p.Price > 20;
@@ -174,8 +201,15 @@ namespace SomeProgrammingConcepts
             //                        .Where(p => p.Name.Length < 5);
 
 
+            var products = new List<Product>
+            {
+                new("milk", 2), new ("Cheese",15)
+            };
+            bool ExpensiveProductΛ(Product p) => p.Number > 10;
+            bool ShortNameΛ(Product p) => p.Name.Length < 5;
 
-
+            var filteredΛ = products.Where(ExpensiveProductΛ)
+                                    .Where(ShortNameΛ);
 
             // Exercise 6 – SelectMany with a named method
             IEnumerable<char> ToChars(string s) { return s.ToCharArray(); }
