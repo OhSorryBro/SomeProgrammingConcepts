@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
@@ -13,6 +15,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static SomeProgrammingConcepts.ΛExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SomeProgrammingConcepts
@@ -29,6 +32,12 @@ namespace SomeProgrammingConcepts
                 Name = name;
                 Number = number;
             }
+        }
+
+        public class Order
+        {
+            public string[] Ordered = { "Nothing" };
+
         }
         private class FirstCharComparer : IEqualityComparer<string>
         {
@@ -216,6 +225,36 @@ namespace SomeProgrammingConcepts
 
             var words = new[] { "ab", "cde", "f" };
             var charsQuery = words.SelectMany(ToChars);
+
+            //Exercise 6a – Words to Characters
+
+            //Given an array of strings, flatten it into a single sequence of all characters
+            //using SelectMany.
+            //Use a named method that converts a word into a sequence of characters.
+
+            string[] someArray = { "Apple", "Pear", "Banana" };
+
+            var someArrayFlatΛ = someArray.SelectMany(s => s.ToCharArray());
+
+            // Exercise 6b – Sentences to Words
+
+            //You have an array of sentences(each a string).
+            //Split each sentence into words and flatten all words into a
+            //single list using SelectMany.
+
+            string[] sentencesArray = {"OhSorryBro, i just made a mistake", "Yep you did",
+            "I did only 135 mistakes this month"};
+
+            var splitSentenceIntoWords = sentencesArray.SelectMany(s => s.Split());
+
+            // Exercise 6c – Orders to Products
+
+            //You have a list of Order objects, and each Order has a collection of Product names.
+            //Use SelectMany to create a single list of all product names across all orders.
+
+            List<Order> listOfOrders = new List<Order>();
+            listOfOrders.Add( new Order { Ordered = new[] { "Milk", "Apple" } });
+
 
             // Exercise 7 – Sorting keys as lambdas
             string Key1(string s) { return s.Substring(0, 1); }
