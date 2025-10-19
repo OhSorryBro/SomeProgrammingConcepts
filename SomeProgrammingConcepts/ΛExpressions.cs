@@ -254,6 +254,8 @@ namespace SomeProgrammingConcepts
 
             List<Order> listOfOrders = new List<Order>();
             listOfOrders.Add( new Order { Ordered = new[] { "Milk", "Apple" } });
+            listOfOrders.Add(new Order { Ordered = new[] { "Milk2", "Apple2" } });
+            var allProducts = listOfOrders.SelectMany(o => o.Ordered);
 
 
             // Exercise 7 – Sorting keys as lambdas
@@ -263,6 +265,42 @@ namespace SomeProgrammingConcepts
             var sorted = words
                 .OrderBy(Key1)
                 .ThenByDescending(Key2);
+
+            // Exercise 7a – Sort Numbers by Absolute Value
+
+            //You have an array of integers(both positive and negative).
+            //Sort them in ascending order by their absolute value using a lambda
+            //expression inside OrderBy.
+            //Then, display the sorted sequence.
+
+            int[] integers = { 3, 10, -3, -10 };
+            integers.OrderBy(i => Math.Abs(i));
+
+
+            // Exercise 7b – Sort Words by Length and Alphabet
+
+            //You have a list of words.
+            //First sort them by length(ascending),
+            //then by alphabetical order(ascending) using ThenBy.
+            //Use lambdas for both keys.
+
+            var words2 = new[] { "ab", "cde", "f" };
+
+            words2.OrderBy(w => w.Length)
+                .ThenBy(w => w);
+
+
+            // Exercise 7c – Sort Products by Price and Name
+
+            //You have a list of Product objects with properties Name and Price.
+            //Sort them by Price(descending) and then by Name(ascending).
+            //Use lambda expressions as key selectors for both OrderByDescending and ThenBy.
+
+            List<Order> listOfOrders2 = new List<Order>();
+            listOfOrders.Add(new Order { Ordered = new[] { "Milk", "Apple" } });
+            listOfOrders.Add(new Order { Ordered = new[] { "Milk2", "Apple2" } });
+
+
 
             // Exercise 8 – Join with key selectors and result selector
             var left = new[] { new { Id = 1, Name = "A" }, new { Id = 2, Name = "B" } };
