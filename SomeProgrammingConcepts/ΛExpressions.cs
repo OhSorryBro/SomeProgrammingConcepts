@@ -323,14 +323,12 @@ namespace SomeProgrammingConcepts
                 RightKey,
                 delegate (dynamic l, dynamic r) { return new { L = l.Name, R = r.Id }; }
             );
-
             var joinedΛ = left.Join(
                 right,
                 LeftKeyΛ,
                 RightKeyΛ,
                 ( l,  r) => new { L = l.Name, R = r.Id }
                 );
-
             // Exercise 8a – Inner Join with Custom Result Selector
             //Perform an inner join between left and right collections on Id ↔ LId.
             //In the result selector, return an anonymous object with:
@@ -338,7 +336,6 @@ namespace SomeProgrammingConcepts
             //RightId = the Id from right,
             //Pair = concatenation of Name +"-" + Id(from right).
             //Use key selectors as in the original example.
-
             var joined8a = left.Join(
                 right,
                 LeftKey,
@@ -349,22 +346,28 @@ namespace SomeProgrammingConcepts
                     RightID = r.Id,
                     Pair = string.Concat(l.Name,"-",r.Id)
                 }
-
-
                 );
-
-
-
-
             //  Exercise 8b – Join with Filtering and Sorting
             //Perform the same join as in 8a, then:
             //filter out pairs where RightId(from right) is even,
             //sort the result ascending by LeftName, and within that, ascending by RightId.
             //Return anonymous objects { LeftName, RightId }.
+            var joined8b = left.Join(
+                right,
+                LeftKey,
+                RightKey,
+                (l, r) => new
+                {
+                    LeftName = l.Name,
+                    RightID = r.Id,
+                    Pair = string.Concat(l.Name, "-", r.Id),
 
-
-
-
+                }
+                )
+                .Where(x => x.RightID % 2 == 1)
+                .OrderBy(ln => ln.LeftName)
+                .ThenBy(RId=>RId.RightID)
+                .Select(xaxa => new { xaxa.LeftName, xaxa.RightID });
 
             // Exercise 8c – Group Join and Aggregation
             //Join left and right on Id ↔ LId, then group the results by LeftName from left.
@@ -375,7 +378,7 @@ namespace SomeProgrammingConcepts
             //Finally, sort the groups in descending order by Count.
 
 
-
+            
 
 
             // Exercise 9 – Query syntax → Method syntax
