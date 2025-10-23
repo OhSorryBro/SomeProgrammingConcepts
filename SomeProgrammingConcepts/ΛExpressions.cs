@@ -313,7 +313,9 @@ namespace SomeProgrammingConcepts
                 new { Id = 12, LId = 2 } };
 
             int LeftKey(dynamic x) { return x.Id; }
+            int LeftKeyΛ(dynamic x) =>x.Id;
             int RightKey(dynamic y) { return y.LId; }
+            int RightKeyΛ(dynamic y) => y.LId;
 
             var joined = left.Join(
                 right,
@@ -321,6 +323,13 @@ namespace SomeProgrammingConcepts
                 RightKey,
                 delegate (dynamic l, dynamic r) { return new { L = l.Name, R = r.Id }; }
             );
+
+            var joinedΛ = left.Join(
+                right,
+                LeftKeyΛ,
+                RightKeyΛ,
+                ( l,  r) => new { L = l.Name, R = r.Id }
+                );
 
             // Exercise 8a – Inner Join with Custom Result Selector
             //Perform an inner join between left and right collections on Id ↔ LId.
@@ -330,7 +339,19 @@ namespace SomeProgrammingConcepts
             //Pair = concatenation of Name +"-" + Id(from right).
             //Use key selectors as in the original example.
 
+            var joined8a = left.Join(
+                right,
+                LeftKey,
+                RightKey,
+                (l, r) => new
+                {
+                    LeftName =l.Name,
+                    RightID = r.Id,
+                    Pair = string.Concat(l.Name,"-",r.Id)
+                }
 
+
+                );
 
 
 
