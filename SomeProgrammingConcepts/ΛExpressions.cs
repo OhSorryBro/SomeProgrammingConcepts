@@ -377,8 +377,37 @@ namespace SomeProgrammingConcepts
             //Count = number of matching right records for that name.
             //Finally, sort the groups in descending order by Count.
 
+            var joined8c =
+                left.Join(
+                    right,
+                    LeftKey,
+                    RightKey,
+                    (l, r) => new
+                    {
+                        LeftName = l.Name,
+                        RightId = r.Id
+                    }
+                )
+                .GroupBy(x => x.LeftName)
+                .Select(group => new
+                {
+                    Name = group.Key,
+                    RightIds = group.Select(g => g.RightId).Distinct(),
+                    Count = group.Count()
+                })
+                .OrderByDescending(x => x.Count);
 
-            
+
+
+
+
+
+
+
+
+
+            //MIKE TO_DO:
+
 
 
             // Exercise 9 – Query syntax → Method syntax
