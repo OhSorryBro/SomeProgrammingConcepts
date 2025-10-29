@@ -43,6 +43,57 @@ namespace SomeProgrammingConcepts
             var QueryL2 = from name in names
                           select new { OriginalName = name, Length = name.Length };
 
+         //Exercise L2a – Project numbers into objects
+            // Given a list of integers:
+            var numbers = new[] { 1, 5, 10, 15, 20 };
+
+            // Task:
+            // Project this list into a new sequence of anonymous objects with the shape:
+            // { Number, IsEven, Square }
+            // where:
+            // - Number is the original value,
+            // - IsEven is true if the number is even,
+            // - Square is the number multiplied by itself.
+
+            var QueryL2a = from number in numbers
+                           select new {Number = number, 
+                                        IsEven = number % 2 == 0,
+                                        Square = number * number};
+
+
+
+            //Exercise L2b – Project people into simplified objects
+            // Given a list of people (with name and age):
+            var people = new[]
+            {
+                new { Name = "Alice", Age = 25 },
+                new { Name = "Bob", Age = 32 },
+                new { Name = "Carla", Age = 19 },
+                new { Name = "David", Age = 40 }
+            };
+            // Task:
+            // Project this list into a sequence of anonymous objects with:
+            // { NameUpper, AgeGroup }
+            // where:
+            // - NameUpper is the uppercase name,
+            // - AgeGroup is "Young" if < 30, otherwise "Adult".
+
+
+
+
+
+
+         //Exercise L2c – Project words into custom structure
+            // Given an array of words:
+            var words = new[] { "tree", "forest", "bush", "flower", "grass" };
+
+            // Task:
+            // Create a projection that returns:
+            // { Word, Length, StartsWithF }
+            // where:
+            // - Word is the original word,
+            // - Length is number of letters,
+            // - StartsWithF is true if word begins with 'f' or 'F'.
 
 
 
@@ -51,13 +102,15 @@ namespace SomeProgrammingConcepts
 
 
 
-         //Exercise L3 – Ordering with multiple keys
-         //You are given:
-         //var words = new[] { "pear", "apple", "kiwi", "banana", "fig" };
-         //    Task:
-         //Sort the words first by length(ascending), and then alphabetically(ascending).
-         //Use OrderBy and ThenBy.
-         //Output: ordered sequence of strings.
+
+
+            //Exercise L3 – Ordering with multiple keys
+            //You are given:
+            //var words = new[] { "pear", "apple", "kiwi", "banana", "fig" };
+            //    Task:
+            //Sort the words first by length(ascending), and then alphabetically(ascending).
+            //Use OrderBy and ThenBy.
+            //Output: ordered sequence of strings.
 
 
 
@@ -68,9 +121,9 @@ namespace SomeProgrammingConcepts
 
 
 
-         //Exercise L4 – First / Single / Any
-         //You are given:
-         var values = new[] { 3, 5, 5, 10, 12, 12, 12 };
+            //Exercise L4 – First / Single / Any
+            //You are given:
+            var values = new[] { 3, 5, 5, 10, 12, 12, 12 };
         //    Tasks:
         //Get the first value greater than 10.
         //Check if there is any value equal to 7 (boolean result).
@@ -101,7 +154,7 @@ namespace SomeProgrammingConcepts
 
         //Exercise L6 – Grouping
         //You are given:
-            var people = new[]
+            var people2 = new[]
             {
                 new { Name = "Anna",   Country = "NL" },
                 new { Name = "Mark",   Country = "NL" },
