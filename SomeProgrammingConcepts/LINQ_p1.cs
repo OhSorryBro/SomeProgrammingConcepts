@@ -30,18 +30,18 @@ namespace SomeProgrammingConcepts
                         select num;
 
 
-
          //Exercise L2 – Projection (Select)
          //You are given a list of strings (names):
-         //var names = new[] { "Anna", "Robert", "Ewa", "Tom" };
-         //        Task:
-         //Project this list into a new sequence of objects with the shape:
-         //{ OriginalName, Length
-         //    },
-         //where OriginalName is the name, and Length is the number of characters.
-         //Output: sequence of anonymous objects.
+         var names = new[] { "Anna", "Robert", "Ewa", "Tom" };
+            //        Task:
+            //Project this list into a new sequence of objects with the shape:
+            //{ OriginalName, Length
+            //    },
+            //where OriginalName is the name, and Length is the number of characters.
+            //Output: sequence of anonymous objects.
 
-
+            var QueryL2 = from name in names
+                          select new { OriginalName = name, Length = name.Length };
 
 
 
