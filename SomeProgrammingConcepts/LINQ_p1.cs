@@ -98,7 +98,7 @@ namespace SomeProgrammingConcepts
                            {
                                Word = word,
                                Length = word.Length,
-                               StartsWithF = word.StartsWith('f')
+                               StartsWithF = word.StartsWith('f') || word.StartsWith('F')
                            };
 
             //Exercise L3 – Ordering with multiple keys

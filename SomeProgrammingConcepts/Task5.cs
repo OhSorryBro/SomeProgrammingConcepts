@@ -26,12 +26,12 @@ namespace SomeProgrammingConcepts
         {
             return a - b;
         }
-        public int Subtract(int a, int b) => a - b;
+        public int Subtract421(int a, int b) => a - b;
         public int Multiply(int a, int b)
         {
             return a * b;
         }
-        public int Multiply(int a, int b) => a * b;
+        public int Multiply421(int a, int b) => a * b;
         public int Division(int a, int b)
         {
             return a / b;
