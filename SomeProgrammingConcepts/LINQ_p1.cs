@@ -78,12 +78,15 @@ namespace SomeProgrammingConcepts
             // - NameUpper is the uppercase name,
             // - AgeGroup is "Young" if < 30, otherwise "Adult".
 
+            var QueryL2b = from person in people
+                           select new { NameUpper = person.Name.ToUpper(),
+                               AgeGroup = person.Age > 30? "Adult": "Young"
+                           };
 
 
 
 
-
-         //Exercise L2c – Project words into custom structure
+            //Exercise L2c – Project words into custom structure
             // Given an array of words:
             var words = new[] { "tree", "forest", "bush", "flower", "grass" };
 
