@@ -29,7 +29,6 @@ namespace SomeProgrammingConcepts
                         where num > 10
                         select num;
 
-
          //Exercise L2 – Projection (Select)
          //You are given a list of strings (names):
          var names = new[] { "Anna", "Robert", "Ewa", "Tom" };
@@ -60,8 +59,6 @@ namespace SomeProgrammingConcepts
                                         IsEven = number % 2 == 0,
                                         Square = number * number};
 
-
-
             //Exercise L2b – Project people into simplified objects
             // Given a list of people (with name and age):
             var people = new[]
@@ -83,9 +80,6 @@ namespace SomeProgrammingConcepts
                                AgeGroup = person.Age > 30? "Adult": "Young"
                            };
 
-
-
-
             //Exercise L2c – Project words into custom structure
             // Given an array of words:
             var words = new[] { "tree", "forest", "bush", "flower", "grass" };
@@ -99,13 +93,13 @@ namespace SomeProgrammingConcepts
             // - StartsWithF is true if word begins with 'f' or 'F'.
 
 
-
-
-
-
-
-
-
+            var QueryL3c = from word in words
+                           select new
+                           {
+                               Word = word,
+                               Length = word.Length,
+                               StartsWithF = word.StartsWith('f')
+                           };
 
             //Exercise L3 – Ordering with multiple keys
             //You are given:
