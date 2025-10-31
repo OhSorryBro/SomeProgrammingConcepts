@@ -103,30 +103,147 @@ namespace SomeProgrammingConcepts
 
             //Exercise L3 – Ordering with multiple keys
             //You are given:
-            //var words = new[] { "pear", "apple", "kiwi", "banana", "fig" };
+            var words2 = new[] { "pear", "apple", "kiwi", "banana", "fig" };
             //    Task:
             //Sort the words first by length(ascending), and then alphabetically(ascending).
             //Use OrderBy and ThenBy.
             //Output: ordered sequence of strings.
 
+            var QueryL3 = words2
+                .OrderBy(word => word.Length)
+                .ThenBy(word => word);
 
 
+            // =======================================================
+            // Exercise L3a – Simple Ordering
+            // =======================================================
+            // Given an array of words:
+              var wordsL3a = new[] { "pear", "apple", "kiwi", "banana", "fig" };
+            //
+            // Task:
+            //   Sort the words alphabetically (ascending).
+            //   Use OrderBy.
+            //
+            // Expected output:
+            //   apple
+            //   banana
+            //   fig
+            //   kiwi
+            //   pear
+            // =======================================================
+            var QueryL3a = wordsL3a
+                .OrderBy(word => word);
 
+            // =======================================================
+            // Exercise L3b – Ordering by Length
+            // =======================================================
+            // Given the same array of words:
+               var wordsL3b = new[] { "pear", "apple", "kiwi", "banana", "fig" };
+            //
+            // Task:
+            //   Sort the words by their length (ascending).
+            //   Use OrderBy.
+            //
+            // Expected output:
+            //   fig
+            //   kiwi
+            //   pear
+            //   apple
+            //   banana
+            // =======================================================
+            var QueryL3b = wordsL3b
+                .OrderBy(word => word.Length);
 
-
-
-
+            // =======================================================
+            // Exercise L3c – Ordering with Multiple Keys
+            // =======================================================
+            // Given:
+               var wordsL3c = new[] { "pear", "apple", "kiwi", "banana", "fig" };
+            //
+            // Task:
+            //   Sort the words first by length (ascending),
+            //   and then alphabetically (ascending).
+            //   Use OrderBy and ThenBy.
+            //
+            // Expected output:
+            //   fig
+            //   kiwi
+            //   pear
+            //   apple
+            //   banana
+            // =======================================================
+            var QueryL3cNew = wordsL3c
+                .OrderBy(word => word.Length)
+                .ThenBy(word => word);
 
 
             //Exercise L4 – First / Single / Any
             //You are given:
             var values = new[] { 3, 5, 5, 10, 12, 12, 12 };
-        //    Tasks:
-        //Get the first value greater than 10.
-        //Check if there is any value equal to 7 (boolean result).
-        //Get the single value equal to 10.
-        //(Assume there is exactly one such value – if not, it should fail.)
-        //Output: three separate results.
+            //    Tasks:
+            //Get the first value greater than 10.
+            //Check if there is any value equal to 7 (boolean result).
+            //Get the single value equal to 10.
+            //(Assume there is exactly one such value – if not, it should fail.)
+            //Output: three separate results.
+
+            var QueryL4 = values
+                .First(x => x > 10);
+
+            var QueryL4Any = values
+                .Any(x => x == 7);
+
+            var QueryL4Single = values
+                .Single(x => x == 10);
+
+            // =======================================================
+            // Exercise L4a – First / Single / Any (Fruits)
+            // =======================================================
+            // Given an array of fruits:
+               var fruits = new[] { "apple", "pear", "banana", "kiwi", "plum", "banana" };
+            //
+            // Tasks:
+            // 1. Get the first fruit that starts with the letter 'b'.
+            // 2. Check if there is any fruit with more than 6 letters (boolean result).
+            // 3. Get the single fruit that equals "kiwi".
+            //    (Assume there is exactly one such fruit – if not, it should fail.)
+            //
+            // Output: three separate results.
+            // =======================================================
+
+
+
+            // =======================================================
+            // Exercise L4b – First / Single / Any (Temperatures)
+            // =======================================================
+            // Given an array of temperatures in Celsius:
+               var temps = new[] { -5, 0, 3, 10, 10, 15, 22, 25 };
+            //
+            // Tasks:
+            // 1. Get the first temperature that is above freezing (greater than 0).
+            // 2. Check if there is any temperature equal to 30 (boolean result).
+            // 3. Get the single temperature equal to 15.
+            //    (Assume there is exactly one such value – if not, it should fail.)
+            //
+            // Output: three separate results.
+            // =======================================================
+
+
+
+            // =======================================================
+            // Exercise L4c – First / Single / Any (Employees)
+            // =======================================================
+            // Given an array of employee ages:
+               var ages = new[] { 19, 25, 32, 32, 45, 50 };
+            //
+            // Tasks:
+            // 1. Get the first employee age greater than 40.
+            // 2. Check if there is any employee age below 18 (boolean result).
+            // 3. Get the single employee age equal to 50.
+            //    (Assume there is exactly one such value – if not, it should fail.)
+            //
+            // Output: three separate results.
+            // =======================================================
 
 
 
@@ -134,13 +251,14 @@ namespace SomeProgrammingConcepts
 
 
 
-        //Exercise L5 – Distinct and Count
-        //You are given:
-        //var cities = new[] { "Paris", "Berlin", "Paris", "London", "Berlin", "Rome" };
-        //    Tasks:
-        //Return all unique city names.
-        //Count how many distinct cities there are.
-        //Output: sequence of unique strings, and an integer.
+
+            //Exercise L5 – Distinct and Count
+            //You are given:
+            //var cities = new[] { "Paris", "Berlin", "Paris", "London", "Berlin", "Rome" };
+            //    Tasks:
+            //Return all unique city names.
+            //Count how many distinct cities there are.
+            //Output: sequence of unique strings, and an integer.
 
 
 
@@ -149,8 +267,8 @@ namespace SomeProgrammingConcepts
 
 
 
-        //Exercise L6 – Grouping
-        //You are given:
+            //Exercise L6 – Grouping
+            //You are given:
             var people2 = new[]
             {
                 new { Name = "Anna",   Country = "NL" },
