@@ -271,17 +271,72 @@ namespace SomeProgrammingConcepts
 
             //Exercise L5 – Distinct and Count
             //You are given:
-            //var cities = new[] { "Paris", "Berlin", "Paris", "London", "Berlin", "Rome" };
+            var cities = new[] { "Paris", "Berlin", "Paris", "London", "Berlin", "Rome" };
             //    Tasks:
             //Return all unique city names.
             //Count how many distinct cities there are.
             //Output: sequence of unique strings, and an integer.
 
+            var QueryL5Dist = cities
+                .Distinct();
+            
+            var QueryL5Count = QueryL5Dist
+                .Count();
+
+            // =======================================================
+            // Exercise L5a – Distinct and Count (Animals)
+            // =======================================================
+            // Given an array of animal names:
+              var animals = new[] { "cat", "dog", "bird", "dog", "cat", "lion", "tiger" };
+            //
+            // Tasks:
+            // 1. Return all unique animal names.
+            // 2. Count how many distinct animals there are.
+            // Output: sequence of unique strings, and an integer.
+            // =======================================================
+
+            var QueryL5aDist = animals
+                .Distinct();
+
+            var QueryL5aCount = QueryL5aDist
+                .Count();
 
 
+            // =======================================================
+            // Exercise L5b – Distinct and Count (Numbers)
+            // =======================================================
+            // Given an array of integers:
+              var numbers2 = new[] { 10, 5, 10, 20, 5, 30, 40, 30 };
+            //
+            // Tasks:
+            // 1. Return all unique numbers.
+            // 2. Count how many distinct numbers there are.
+            // Output: sequence of unique integers, and an integer.
+            // =======================================================
+
+            var QueryL5b = numbers2
+                .Distinct();
+
+            var QueryL5bCount = QueryL5b
+                .Count();
 
 
+            // =======================================================
+            // Exercise L5c – Distinct and Count (Countries)
+            // =======================================================
+            // Given an array of country names:
+              var countries = new[] { "Netherlands", "Belgium", "France", "Germany", "France", "Italy", "Germany" };
+            //
+            // Tasks:
+            // 1. Return all unique country names.
+            // 2. Count how many distinct countries there are.
+            // Output: sequence of unique strings, and an integer.
+            // =======================================================
 
+            var QueryL5c = countries
+                .Distinct();
+            var QueryL5cCount = QueryL5c
+                .Count();
 
 
             //Exercise L6 – Grouping
@@ -294,16 +349,93 @@ namespace SomeProgrammingConcepts
                 new { Name = "Luca",   Country = "IT" },
                 new { Name = "Mario",  Country = "IT" },
             };
-
-
             //    Task:
             //Group people by Country.
             //For each country, return an object:
             //{ Country, People = [all names from that country] }
             //    Output: sequence of anonymous objects.
+
+            var QueryL6 = people2
+                .GroupBy(p => p.Country)
+                .Select (g => new {Country = g.Key, People = g});
+
+            // =======================================================
+            // Exercise L6a – Grouping (Students by Grade)
+            // =======================================================
+            // Given an array of students:
+            var students = new[]
+            {
+                   new { Name = "Alice",  Grade = "A" },
+                   new { Name = "Bob",    Grade = "B" },
+                   new { Name = "Carla",  Grade = "A" },
+                   new { Name = "David",  Grade = "C" },
+                   new { Name = "Eva",    Grade = "B" },
+               };
+
+            // Tasks:
+            // 1. Group students by their Grade.
+            // 2. For each grade, return an object:
+            //    { Grade, Students = [all names with that grade] }
+            // Output: sequence of anonymous objects.
+            // =======================================================
+
+            var QueryL6a = students
+                .GroupBy(s => s.Grade)
+                .Select(g => new { Grade = g.Key, Students = g });
+
+
+            // =======================================================
+            // Exercise L6b – Grouping (Products by Category)
+            // =======================================================
+            // Given an array of products:
+            var products = new[]
+            {
+                   new { Name = "Milk",     Category = "Dairy" },
+                   new { Name = "Cheese",   Category = "Dairy" },
+                   new { Name = "Apple",    Category = "Fruit" },
+                   new { Name = "Banana",   Category = "Fruit" },
+                   new { Name = "Bread",    Category = "Bakery" },
+               };
+            //
+            // Tasks:
+            // 1. Group products by their Category.
+            // 2. For each category, return an object:
+            //    { Category, Products = [all names in that category] }
+            // Output: sequence of anonymous objects.
+            // =======================================================
+
+            var QueryL6b = products
+                .GroupBy(p => p.Category)
+                .Select(g => new {Category = g.Key, Products = g.Select(s=> s.Name)});
+
+
+            // =======================================================
+            // Exercise L6c – Grouping (Employees by Department)
+            // =======================================================
+            // Given an array of employees:
+            var employees = new[]
+            {
+                   new { Name = "John",  Department = "HR" },
+                   new { Name = "Lisa",  Department = "IT" },
+                   new { Name = "Tom",   Department = "IT" },
+                   new { Name = "Nina",  Department = "Finance" },
+                   new { Name = "Sara",  Department = "HR" },
+               };
+            //
+            // Tasks:
+            // 1. Group employees by their Department.
+            // 2. For each department, return an object:
+            //    { Department, Employees = [all names in that department] }
+            // Output: sequence of anonymous objects.
+            // =======================================================
+
+            var QueryL6c = employees
+                .GroupBy(e => e.Department)
+                .Select(g => new { Department = g.Key, Employees = g.Select(g => g.Name) });
+
+
             //    Exercise L7 – Flatten (SelectMany)
             //    You are given:
-
 
             var orders = new[]
             {
@@ -312,11 +444,73 @@ namespace SomeProgrammingConcepts
                 new { OrderId = 1003, Items = new[] { "Water" } }
                 };
             //    Task:
-            //Create a flat sequence of all item names across all orders(no grouping, just a flat list of strings).
+            //Create a flat sequence of all item names across all 
+            //orders(no grouping, just a flat list of strings).
             //Then remove duplicates.
 
             //Output: sequence of unique item names.
 
+            var QueryL7 = orders
+                .SelectMany(o => o.Items)
+                .Distinct();
+
+            // =======================================================
+            // Exercise L7a – Flatten (Books and Authors)
+            // =======================================================
+            //Given an array of books:
+            var books = new[]
+            {
+                   new { Title = "Book A", Authors = new[] { "Alice", "Bob" } },
+                   new { Title = "Book B", Authors = new[] { "Carla" } },
+                   new { Title = "Book C", Authors = new[] { "Bob", "David" } },
+               };
+            //
+            // Tasks:
+            // 1. Create a flat sequence of all author names across all books.
+            // 2. Remove duplicates.
+            // Output: sequence of unique author names.
+            // =======================================================
+
+            var QueryL7a = books
+                .SelectMany(b => b.Authors)
+                .Distinct();
+
+            // =======================================================
+            // Exercise L7b – Flatten (Students and Courses)
+            // =======================================================
+            // Given an array of students:
+            var students2 = new[]
+            {
+                   new { Name = "John",  Courses = new[] { "Math", "Physics" } },
+                   new { Name = "Lisa",  Courses = new[] { "Biology", "Math" } },
+                   new { Name = "Mark",  Courses = new[] { "Chemistry", "Math", "Biology" } },
+               };
+
+            // Tasks:
+            // 1. Create a flat sequence of all course names across all students.
+            // 2. Remove duplicates.
+            // Output: sequence of unique course names.
+            // =======================================================
+
+
+
+
+            // =======================================================
+            // Exercise L7c – Flatten (Companies and Departments)
+            // =======================================================
+            // Given an array of companies:
+            var companies = new[]
+            {
+                   new { Name = "TechCorp",   Departments = new[] { "IT", "HR", "Finance" } },
+                   new { Name = "LogiTrans",  Departments = new[] { "Logistics", "IT" } },
+                   new { Name = "MediCare",   Departments = new[] { "HR", "Health", "Finance" } },
+               };
+
+            // Tasks:
+            // 1. Create a flat sequence of all department names across all companies.
+            // 2. Remove duplicates.
+            // Output: sequence of unique department names.
+            // =======================================================
 
 
 
