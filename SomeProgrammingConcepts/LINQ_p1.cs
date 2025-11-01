@@ -211,7 +211,14 @@ namespace SomeProgrammingConcepts
             // Output: three separate results.
             // =======================================================
 
+            var QueryL4aFirst = fruits
+                .First(f => f.StartsWith('b'));
 
+            var QueryL4aAny = fruits
+                .Any(f => f.Length > 6);
+
+            var QueryL4aSingle = fruits
+                .Single(f => f == "kiwi");
 
             // =======================================================
             // Exercise L4b – First / Single / Any (Temperatures)
@@ -228,7 +235,14 @@ namespace SomeProgrammingConcepts
             // Output: three separate results.
             // =======================================================
 
+            var QueryL4bFirst = temps
+                .First(t => t > 0);
 
+            var QueryL4bAny = temps
+                .Any(t => t == 30);
+
+            var QueryL4bSingle = temps
+                .Single(t => t == 15);
 
             // =======================================================
             // Exercise L4c – First / Single / Any (Employees)
@@ -246,11 +260,14 @@ namespace SomeProgrammingConcepts
             // =======================================================
 
 
+            var QueryL4cFirst = ages
+                .First(a => a > 40);
 
+            var QueryL4cAny = ages
+                .Any(a => a < 18);
 
-
-
-
+            var QueryL4cSingle = ages
+                .Single(a => a == 50);
 
             //Exercise L5 – Distinct and Count
             //You are given:
@@ -279,59 +296,59 @@ namespace SomeProgrammingConcepts
             };
 
 
-        //    Task:
-        //Group people by Country.
-        //For each country, return an object:
-        //{ Country, People = [all names from that country] }
-        //    Output: sequence of anonymous objects.
-        //    Exercise L7 – Flatten (SelectMany)
-        //    You are given:
+            //    Task:
+            //Group people by Country.
+            //For each country, return an object:
+            //{ Country, People = [all names from that country] }
+            //    Output: sequence of anonymous objects.
+            //    Exercise L7 – Flatten (SelectMany)
+            //    You are given:
 
 
-        var orders = new[]
-        {
-            new { OrderId = 1001, Items = new[] { "Milk", "Cheese" } },
-            new { OrderId = 1002, Items = new[] { "Beer", "Chips", "Nuts" } },
-            new { OrderId = 1003, Items = new[] { "Water" } }
+            var orders = new[]
+            {
+                new { OrderId = 1001, Items = new[] { "Milk", "Cheese" } },
+                new { OrderId = 1002, Items = new[] { "Beer", "Chips", "Nuts" } },
+                new { OrderId = 1003, Items = new[] { "Water" } }
+                };
+            //    Task:
+            //Create a flat sequence of all item names across all orders(no grouping, just a flat list of strings).
+            //Then remove duplicates.
+
+            //Output: sequence of unique item names.
+
+
+
+
+
+
+
+            //Exercise L8 – Join
+
+            //You are given:
+
+            var customers = new[]
+            {
+                new { CustomerId = 1, Name = "FrieslandCampina" },
+                new { CustomerId = 2, Name = "Heineken" },
+                new { CustomerId = 3, Name = "Nabuurs" }
             };
-        //    Task:
-        //Create a flat sequence of all item names across all orders(no grouping, just a flat list of strings).
-        //Then remove duplicates.
 
-        //Output: sequence of unique item names.
-
-
-
-
-
+            var orders2 = new[]
+            {
+                new { OrderId = 5001, CustomerId = 1 },
+                new { OrderId = 5002, CustomerId = 2 },
+                new { OrderId = 5003, CustomerId = 2 },
+                new { OrderId = 5004, CustomerId = 3 }
+            };
 
 
-        //Exercise L8 – Join
+            //    Task:
+            //Join customers with orders2 on CustomerId.
+            //Return an object for each match:
+            //{ CustomerName, OrderId }.
 
-        //You are given:
-
-        var customers = new[]
-        {
-            new { CustomerId = 1, Name = "FrieslandCampina" },
-            new { CustomerId = 2, Name = "Heineken" },
-            new { CustomerId = 3, Name = "Nabuurs" }
-        };
-
-        var orders2 = new[]
-        {
-            new { OrderId = 5001, CustomerId = 1 },
-            new { OrderId = 5002, CustomerId = 2 },
-            new { OrderId = 5003, CustomerId = 2 },
-            new { OrderId = 5004, CustomerId = 3 }
-        };
-
-
-        //    Task:
-        //Join customers with orders2 on CustomerId.
-        //Return an object for each match:
-        //{ CustomerName, OrderId }.
-
-        //Output: sequence of anonymous objects.
+            //Output: sequence of anonymous objects.
 
 
 
@@ -341,17 +358,17 @@ namespace SomeProgrammingConcepts
 
 
 
-        //Exercise L9 – Aggregation and summary per group
+            //Exercise L9 – Aggregation and summary per group
 
-        //You are given:
-         var lines = new[]
-        {
-        new { OrderId = 5001, Product = "Milk",   Qty = 10, Price = 1.20m },
-        new { OrderId = 5001, Product = "Cheese", Qty =  5, Price = 3.50m },
-        new { OrderId = 5002, Product = "Beer",   Qty = 20, Price = 1.10m },
-        new { OrderId = 5002, Product = "Chips",  Qty = 10, Price = 0.80m },
-        new { OrderId = 5003, Product = "Beer",   Qty = 30, Price = 1.15m },
-        };
+            //You are given:
+             var lines = new[]
+            {
+            new { OrderId = 5001, Product = "Milk",   Qty = 10, Price = 1.20m },
+            new { OrderId = 5001, Product = "Cheese", Qty =  5, Price = 3.50m },
+            new { OrderId = 5002, Product = "Beer",   Qty = 20, Price = 1.10m },
+            new { OrderId = 5002, Product = "Chips",  Qty = 10, Price = 0.80m },
+            new { OrderId = 5003, Product = "Beer",   Qty = 30, Price = 1.15m },
+            };
 
 
             //    Task:
