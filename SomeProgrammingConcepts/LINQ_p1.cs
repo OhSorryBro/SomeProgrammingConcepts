@@ -492,7 +492,9 @@ namespace SomeProgrammingConcepts
             // Output: sequence of unique course names.
             // =======================================================
 
-
+            var QueryL7b = students2
+                .SelectMany(s => s.Courses)
+                .Distinct();
 
 
             // =======================================================
@@ -513,14 +515,12 @@ namespace SomeProgrammingConcepts
             // =======================================================
 
 
-
-
-
+            var QueryL7c = companies
+                .SelectMany(c => c.Departments)
+                .Distinct();
 
             //Exercise L8 – Join
-
             //You are given:
-
             var customers = new[]
             {
                 new { CustomerId = 1, Name = "FrieslandCampina" },
@@ -536,17 +536,161 @@ namespace SomeProgrammingConcepts
                 new { OrderId = 5004, CustomerId = 3 }
             };
 
-
             //    Task:
             //Join customers with orders2 on CustomerId.
             //Return an object for each match:
             //{ CustomerName, OrderId }.
-
             //Output: sequence of anonymous objects.
 
+            var QueryL8 = customers.Join(orders2
+                , customer => customer.CustomerId
+                , order => order.CustomerId
+                , (customer, order) => new { CustomerName = customer.Name, OrderId = order.OrderId}
+                );
+
+
+            // =======================================================
+            // Exercise L8a – Join (Students and Grades)
+            // =======================================================
+            // Given two arrays:
+
+            var studentsL8a = new[]
+            {
+                   new { StudentId = 1, Name = "Alice" },
+                   new { StudentId = 2, Name = "Bob" },
+                   new { StudentId = 3, Name = "Carla" },
+               };
+
+            var gradesL8a = new[]
+            {
+                   new { StudentId = 1, Grade = "A" },
+                   new { StudentId = 2, Grade = "B" },
+                   new { StudentId = 3, Grade = "A" },
+               };
+
+            // Tasks:
+            // 1. Join students with grades on StudentId.
+            // 2. Return an object for each match:
+            //    { StudentName, Grade }.
+            // Output: sequence of anonymous objects.
+            // =======================================================
 
 
 
+
+            // =======================================================
+            // Exercise L8b – Join (Employees and Departments)
+            // =======================================================
+            // Given two arrays:
+
+            var employeesL8b = new[]
+            {
+                   new { EmpId = 1, Name = "John" },
+                   new { EmpId = 2, Name = "Lisa" },
+                   new { EmpId = 3, Name = "Tom" },
+               };
+
+            var departmentsL8b = new[]
+            {
+                   new { EmpId = 1, Department = "HR" },
+                   new { EmpId = 2, Department = "IT" },
+                   new { EmpId = 3, Department = "Finance" },
+               };
+            //
+            // Tasks:
+            // 1. Join employees with departments on EmpId.
+            // 2. Return an object for each match:
+            //    { EmployeeName, Department }.
+            // Output: sequence of anonymous objects.
+            // =======================================================
+
+
+
+
+            // =======================================================
+            // Exercise L8c – Join (Orders and Customers)
+            // =======================================================
+            // Given two arrays:
+
+            var customersL8c = new[]
+            {
+                   new { Id = 1, Name = "FrieslandCampina" },
+                   new { Id = 2, Name = "Heineken" },
+                   new { Id = 3, Name = "Nabuurs" },
+               };
+
+            var ordersL8c = new[]
+            {
+                   new { OrderId = 1001, CustomerId = 1 },
+                   new { OrderId = 1002, CustomerId = 2 },
+                   new { OrderId = 1003, CustomerId = 3 },
+                   new { OrderId = 1004, CustomerId = 2 },
+               };
+            //
+            // Tasks:
+            // 1. Join customers with orders on CustomerId.
+            // 2. Return an object for each match:
+            //    { CustomerName, OrderId }.
+            // Output: sequence of anonymous objects.
+            // =======================================================
+
+
+
+
+            // =======================================================
+            // Exercise L8d – Join (Products and Categories)
+            // =======================================================
+            // Given two arrays:
+
+            var productsL8d = new[]
+            {
+                   new { Id = 1, Name = "Milk", CategoryId = 10 },
+                   new { Id = 2, Name = "Cheese", CategoryId = 10 },
+                   new { Id = 3, Name = "Banana", CategoryId = 20 },
+                   new { Id = 4, Name = "Bread", CategoryId = 30 },
+               };
+
+            var categoriesL8d = new[]
+            {
+                   new { CategoryId = 10, CategoryName = "Dairy" },
+                   new { CategoryId = 20, CategoryName = "Fruit" },
+                   new { CategoryId = 30, CategoryName = "Bakery" },
+               };
+            //
+            // Tasks:
+            // 1. Join products with categories on CategoryId.
+            // 2. Return an object for each match:
+            //    { ProductName, CategoryName }.
+            // Output: sequence of anonymous objects.
+            // =======================================================
+
+
+
+
+            // =======================================================
+            // Exercise L8e – Join (Books and Publishers)
+            // =======================================================
+            // Given two arrays:
+
+            var booksL8e = new[]
+            {
+                   new { Id = 1, Title = "C# Basics", PublisherId = 100 },
+                   new { Id = 2, Title = "LINQ Mastery", PublisherId = 200 },
+                   new { Id = 3, Title = "Data Structures", PublisherId = 100 },
+               };
+
+            var publishersL8e = new[]
+            {
+                   new { PublisherId = 100, Name = "TechPress" },
+                   new { PublisherId = 200, Name = "CodeHouse" },
+               };
+
+            // Tasks:
+            // 1. Join books with publishers on PublisherId.
+            // 2. Return an object for each match:
+            //    { BookTitle, PublisherName }.
+            // Output: sequence of anonymous objects.
+            // =======================================================
 
 
 
@@ -555,7 +699,7 @@ namespace SomeProgrammingConcepts
             //Exercise L9 – Aggregation and summary per group
 
             //You are given:
-             var lines = new[]
+            var lines = new[]
             {
             new { OrderId = 5001, Product = "Milk",   Qty = 10, Price = 1.20m },
             new { OrderId = 5001, Product = "Cheese", Qty =  5, Price = 3.50m },
