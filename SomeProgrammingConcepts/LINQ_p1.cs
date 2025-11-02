@@ -575,7 +575,12 @@ namespace SomeProgrammingConcepts
             // Output: sequence of anonymous objects.
             // =======================================================
 
-
+            var QueryL8a = studentsL8a.Join(gradesL8a,
+                students => students.StudentId,
+                grades => grades.StudentId,
+                (students, grades) => new { StudentName = students.Name, Grade = grades.Grade }
+                );
+                
 
 
             // =======================================================
@@ -604,7 +609,12 @@ namespace SomeProgrammingConcepts
             // Output: sequence of anonymous objects.
             // =======================================================
 
-
+            var QueryL8b = employeesL8b.Join(
+                departmentsL8b,
+                employeesKey => employeesKey.EmpId,
+                departmentsKey => departmentsKey.EmpId,
+                (employeesKey, departmentsKey) => new { EmployeeName = employeesKey.Name,
+                    Department = departmentsKey.Department });
 
 
             // =======================================================
