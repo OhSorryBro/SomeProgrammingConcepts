@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Numerics;
@@ -783,7 +784,15 @@ namespace SomeProgrammingConcepts
             // Output: sequence of anonymous objects.
             // =======================================================
 
-
+            var QueryL9a = sales
+                .GroupBy(s => s.Region)
+                .Select(s => new
+                {
+                    Region = s.Key,
+                    TotalSales = s.Sum(TS => TS.Amount),
+                    AvgSales = s.Average(TS => TS.Amount)
+                })
+                .OrderByDescending(s=>s.TotalSales);
 
 
             // =======================================================
@@ -809,7 +818,15 @@ namespace SomeProgrammingConcepts
             // Output: sequence of anonymous objects.
             // =======================================================
 
-
+            var QueryL9b = productsL9b
+                .GroupBy(groupingKey => groupingKey.Category)
+                .Select(Grouped => new
+                {
+                    Category = Grouped.Key,
+                    TotalQty = Grouped.Sum(Summing => Summing.Qty),
+                    CountProducts = Grouped.Count()
+                })
+                .OrderByDescending(Sorting => Sorting.TotalQty);
 
 
             // =======================================================
@@ -835,7 +852,15 @@ namespace SomeProgrammingConcepts
             // Output: sequence of anonymous objects.
             // =======================================================
 
-
+            var QueryL9c = studentsL9c
+                .GroupBy(GroupingKey => GroupingKey.Grade)
+                .Select(Grouping => new
+                {
+                    Grade = Grouping.Key,
+                    Count = Grouping.Count(),
+                    AvgScore = Grouping.Average(AverageKey => AverageKey.Score)
+                })
+                .OrderByDescending(Sorting => Sorting.AvgScore);
 
 
             // =======================================================
