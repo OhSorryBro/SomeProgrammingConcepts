@@ -644,7 +644,15 @@ namespace SomeProgrammingConcepts
             // Output: sequence of anonymous objects.
             // =======================================================
 
-
+            var QueryL8c = customersL8c.Join(
+                ordersL8c,
+                customesL8cKey => customesL8cKey.Id,
+                ordersL8cKey => ordersL8cKey.CustomerId,
+                (customersL8cKey, ordersL8cKey) => new
+                {
+                    CustomerName = customersL8cKey.Name,
+                    OrderId = ordersL8cKey.OrderId
+                });
 
 
             // =======================================================
@@ -674,7 +682,15 @@ namespace SomeProgrammingConcepts
             // Output: sequence of anonymous objects.
             // =======================================================
 
-
+            var QueryL8d = productsL8d.Join(categoriesL8d,
+                productsL8dKey => productsL8dKey.CategoryId,
+                categoriesL8dKey => categoriesL8dKey.CategoryId,
+                (productsL8dKey, categoriesL8dKey) => new
+                {
+                    ProductName = productsL8dKey.Name,
+                    CategoryName = categoriesL8dKey.CategoryName
+                }
+                );
 
 
             // =======================================================
@@ -702,7 +718,13 @@ namespace SomeProgrammingConcepts
             // Output: sequence of anonymous objects.
             // =======================================================
 
-
+            var QueryL8e = booksL8e.Join(
+                publishersL8e,
+                booksL8eKey => booksL8eKey.PublisherId,
+                publischersL8eKey => publischersL8eKey.PublisherId,
+                (booksL8eKey, publischersL8eKey) => new { BookTitle = booksL8eKey.Title,
+                    PublischerName = publischersL8eKey.Name });
+            
 
 
 
@@ -728,6 +750,143 @@ namespace SomeProgrammingConcepts
             //Then sort the result by TotalValue descending.
             //Output: ordered sequence of anonymous objects.
 
+            var QueryL9 = lines
+                .GroupBy(l => l.OrderId)
+                .Select(g=> new
+                {
+                    Key = g.Key,
+                    TotalQty = g.Sum(x => x.Qty),
+                    TotalValue = g.Sum(x=> x.Qty * x.Price),
+                })
+                .OrderByDescending(TV => TV.TotalValue);
+
+            // =======================================================
+            // Exercise L9a – Aggregation (Sales per Region)
+            // =======================================================
+            // Given an array of sales records:
+            var sales = new[]
+           {
+                new { Region = "North", SalesPerson = "Alice", Amount = 1200m },
+                new { Region = "North", SalesPerson = "Bob",   Amount = 1500m },
+                new { Region = "South", SalesPerson = "Carla", Amount = 800m },
+                new { Region = "South", SalesPerson = "David", Amount = 1000m },
+                new { Region = "West",  SalesPerson = "Eva",   Amount = 950m },
+            };
+            //
+            // Tasks:
+            // 1. Group sales by Region.
+            // 2. For each region, calculate:
+            //    - TotalSales = sum of Amount,
+            //    - AvgSales = average of Amount.
+            // 3. Return objects: { Region, TotalSales, AvgSales }.
+            // 4. Sort results by TotalSales descending.
+            // Output: sequence of anonymous objects.
+            // =======================================================
+
+
+
+
+            // =======================================================
+            // Exercise L9b – Aggregation (Products per Category)
+            // =======================================================
+            // Given an array of products:
+            var productsL9b = new[]
+            {
+                new { Category = "Fruit", Name = "Apple",  Qty = 10 },
+                new { Category = "Fruit", Name = "Banana", Qty = 15 },
+                new { Category = "Dairy", Name = "Milk",   Qty = 20 },
+                new { Category = "Dairy", Name = "Cheese", Qty = 5 },
+                new { Category = "Bakery", Name = "Bread", Qty = 8 },
+            };
+            //
+            // Tasks:
+            // 1. Group products by Category.
+            // 2. For each category, calculate:
+            //    - TotalQty = sum of Qty,
+            //    - CountProducts = number of products.
+            // 3. Return objects: { Category, TotalQty, CountProducts }.
+            // 4. Sort results by TotalQty descending.
+            // Output: sequence of anonymous objects.
+            // =======================================================
+
+
+
+
+            // =======================================================
+            // Exercise L9c – Aggregation (Students by Grade)
+            // =======================================================
+            // Given an array of students:
+            var studentsL9c = new[]
+            {
+                new { Name = "Alice", Grade = "A", Score = 95 },
+                new { Name = "Bob",   Grade = "B", Score = 80 },
+                new { Name = "Carla", Grade = "A", Score = 90 },
+                new { Name = "David", Grade = "C", Score = 70 },
+                new { Name = "Eva",   Grade = "B", Score = 85 },
+            };
+            //
+            // Tasks:
+            // 1. Group students by Grade.
+            // 2. For each grade, calculate:
+            //    - Count = number of students,
+            //    - AvgScore = average of Score.
+            // 3. Return objects: { Grade, Count, AvgScore }.
+            // 4. Sort results by AvgScore descending.
+            // Output: sequence of anonymous objects.
+            // =======================================================
+
+
+
+
+            // =======================================================
+            // Exercise L9d – Aggregation (Orders per Customer)
+            // =======================================================
+            // Given an array of orders:
+            var ordersL9d = new[]
+            {
+                new { Customer = "FrieslandCampina", Value = 1200m },
+                new { Customer = "Heineken",         Value = 900m },
+                new { Customer = "Heineken",         Value = 600m },
+                new { Customer = "Nabuurs",          Value = 1500m },
+                new { Customer = "FrieslandCampina", Value = 800m },
+            };
+            //
+            // Tasks:
+            // 1. Group orders by Customer.
+            // 2. For each customer, calculate:
+            //    - TotalValue = sum of Value,
+            //    - OrdersCount = number of orders.
+            // 3. Return objects: { Customer, TotalValue, OrdersCount }.
+            // 4. Sort results by TotalValue descending.
+            // Output: sequence of anonymous objects.
+            // =======================================================
+
+
+
+
+            // =======================================================
+            // Exercise L9e – Aggregation (Products per Supplier)
+            // =======================================================
+            // Given an array of products:
+            var productsL9e = new[]
+            {
+                new { Supplier = "FreshFarms",   Product = "Milk",   Qty = 10, Price = 1.2m },
+                new { Supplier = "FreshFarms",   Product = "Cheese", Qty = 5,  Price = 3.5m },
+                new { Supplier = "GreenGrow",    Product = "Apple",  Qty = 20, Price = 0.8m },
+                new { Supplier = "GreenGrow",    Product = "Banana", Qty = 15, Price = 0.6m },
+                new { Supplier = "BakeHouse",    Product = "Bread",  Qty = 8,  Price = 2.0m },
+            };
+            //
+            // Tasks:
+            // 1. Group products by Supplier.
+            // 2. For each supplier, calculate:
+            //    - TotalQty = sum of Qty,
+            //    - TotalValue = sum of Qty * Price,
+            //    - AvgPrice = average of Price.
+            // 3. Return objects: { Supplier, TotalQty, TotalValue, AvgPrice }.
+            // 4. Sort results by TotalValue descending.
+            // Output: sequence of anonymous objects.
+            // =======================================================
 
 
 
