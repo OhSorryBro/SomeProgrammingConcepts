@@ -438,7 +438,7 @@ namespace SomeProgrammingConcepts
             //    Exercise L7 – Flatten (SelectMany)
             //    You are given:
 
-            var orders = new[]
+            var orders2 = new[]
             {
                 new { OrderId = 1001, Items = new[] { "Milk", "Cheese" } },
                 new { OrderId = 1002, Items = new[] { "Beer", "Chips", "Nuts" } },
@@ -451,7 +451,7 @@ namespace SomeProgrammingConcepts
 
             //Output: sequence of unique item names.
 
-            var QueryL7 = orders
+            var QueryL7 = orders2
                 .SelectMany(o => o.Items)
                 .Distinct();
 
@@ -522,14 +522,14 @@ namespace SomeProgrammingConcepts
 
             //Exercise L8 – Join
             //You are given:
-            var customers = new[]
+            var customers2 = new[]
             {
                 new { CustomerId = 1, Name = "FrieslandCampina" },
                 new { CustomerId = 2, Name = "Heineken" },
                 new { CustomerId = 3, Name = "Nabuurs" }
             };
 
-            var orders2 = new[]
+            var orders23 = new[]
             {
                 new { OrderId = 5001, CustomerId = 1 },
                 new { OrderId = 5002, CustomerId = 2 },
@@ -543,7 +543,7 @@ namespace SomeProgrammingConcepts
             //{ CustomerName, OrderId }.
             //Output: sequence of anonymous objects.
 
-            var QueryL8 = customers.Join(orders2
+            var QueryL8 = customers2.Join(orders23
                 , customer => customer.CustomerId
                 , order => order.CustomerId
                 , (customer, order) => new { CustomerName = customer.Name, OrderId = order.OrderId}
@@ -732,7 +732,7 @@ namespace SomeProgrammingConcepts
             //Exercise L9 – Aggregation and summary per group
 
             //You are given:
-            var lines = new[]
+            var lines2 = new[]
             {
             new { OrderId = 5001, Product = "Milk",   Qty = 10, Price = 1.20m },
             new { OrderId = 5001, Product = "Cheese", Qty =  5, Price = 3.50m },
@@ -751,7 +751,7 @@ namespace SomeProgrammingConcepts
             //Then sort the result by TotalValue descending.
             //Output: ordered sequence of anonymous objects.
 
-            var QueryL9 = lines
+            var QueryL9 = lines2
                 .GroupBy(l => l.OrderId)
                 .Select(g=> new
                 {
@@ -886,7 +886,15 @@ namespace SomeProgrammingConcepts
             // Output: sequence of anonymous objects.
             // =======================================================
 
-
+            var QueryL9d = ordersL9d
+                .GroupBy(GroupingKey => GroupingKey.Customer)
+                .Select(Grouped => new
+                {
+                    Customer = Grouped.Key,
+                    TotalValue = Grouped.Sum(Grouped => Grouped.Value),
+                    OrdersCount = Grouped.Count()
+                })
+                .OrderByDescending(GroupedOrderBy => GroupedOrderBy.TotalValue);
 
 
             // =======================================================
@@ -913,16 +921,22 @@ namespace SomeProgrammingConcepts
             // Output: sequence of anonymous objects.
             // =======================================================
 
-
-
-
+            var QueryL9e = productsL9e
+                .GroupBy(GroupingKey => GroupingKey.Supplier)
+                .Select(Grouped => new
+                {
+                    Supplier = Grouped.Key,
+                    TotalQty = Grouped.Sum(Calculation => Calculation.Qty),
+                    TotalValue = Grouped.Sum(Calculation => Calculation.Qty * Calculation.Price),
+                    AvgPrice = Grouped.Average(Calculation => Calculation.Price)
+                })
+                .OrderByDescending(Sorting => Sorting.TotalValue);
 
 
             //Exercise L10 – Build a report-style structure
-            //You are given the same customers, orders2, and lines from L8/L9.
+            //You are given the same customers, orders, and lines from L8/L9.
             //Task:
             //Build a sequence where each element represents a customer and looks like this:
-
             //{
             //    CustomerName: "...",
             //    Orders: [
@@ -935,15 +949,80 @@ namespace SomeProgrammingConcepts
             //    ],
             //    GrandTotalValue: ... // sum of TotalValue of all that customer's orders
             //}
+            var lines = new[]
+{
+            new { OrderId = 5001, Product = "Milk",   Qty = 10, Price = 1.20m },
+            new { OrderId = 5001, Product = "Cheese", Qty =  5, Price = 3.50m },
+            new { OrderId = 5002, Product = "Beer",   Qty = 20, Price = 1.10m },
+            new { OrderId = 5002, Product = "Chips",  Qty = 10, Price = 0.80m },
+            new { OrderId = 5003, Product = "Beer",   Qty = 30, Price = 1.15m },
+            };
+            var customers = new[]
+{
+                new { CustomerId = 1, Name = "FrieslandCampina" },
+                new { CustomerId = 2, Name = "Heineken" },
+                new { CustomerId = 3, Name = "Nabuurs" }
+            };
 
+            var orders = new[]
+            {
+                new { OrderId = 5001, CustomerId = 1 },
+                new { OrderId = 5002, CustomerId = 2 },
+                new { OrderId = 5003, CustomerId = 2 },
+                new { OrderId = 5004, CustomerId = 3 }
+            };
+
+            var QueryL10OrderSummary = lines
+                .GroupBy(grouping => grouping.OrderId)
+                .Select(Grouping => new
+                {
+                    OrderId = Grouping.Key,
+                    Products = Grouping.Select( x=> x.Product).Distinct(),
+                    TotalValue = Grouping.Sum(s => s.Qty* s.Price)
+                }
+                );
+
+            var QueryL10OrderWithSummary = orders.Join(
+                QueryL10OrderSummary,
+                ordersKey => ordersKey.OrderId,
+                QueryL10OrderSummaryKey => QueryL10OrderSummaryKey.OrderId,
+                (ordersKey, QueryL10OrderSummaryKey) => new
+                {
+                    OrderId = ordersKey.OrderId,
+                    CustomerId = ordersKey.CustomerId,
+                    TotalValue = QueryL10OrderSummaryKey.TotalValue,
+                    Products = QueryL10OrderSummaryKey.Products
+                });
+
+            var QueryL10OrderWithSummaryGrouping = QueryL10OrderWithSummary
+                .GroupBy(g => g.CustomerId)
+                .Join(customers,
+                QueryL10OrderWithSummaryKey => QueryL10OrderWithSummaryKey.Key,
+                customersKey => customersKey.CustomerId,
+                (QueryL10OrderWithSummaryKey, customersKey) => new
+                {
+                    CustomerName = customersKey.Name,
+                    Orders = QueryL10OrderWithSummaryKey.Select(x=> new
+                    {
+                        OrderId = x.OrderId,
+                        TotalValue = x.TotalValue,
+                        Products = x.Products
+                    }
+                    ).OrderByDescending(o => o.TotalValue),
+                    GrandTotalValue = QueryL10OrderWithSummaryKey.Sum(x => x.TotalValue)
+
+                }
+                ).OrderByDescending(x => x.GrandTotalValue);
 
             //Requirements:
             //A customer with multiple orders should have multiple entries in Orders.
-            //If an order has multiple lines with the same product name, only list that product once in Products.
+            //If an order has multiple lines with the same product name,
+            //only list that product once in Products.
             //Sort each customer's Orders by TotalValue descending.
             //Sort the customers themselves by GrandTotalValue descending.
             //Output: complex hierarchical anonymous objects.
-            //(This is the “mini-report” task. If you can do this cleanly, to be blunt, you’re dangerous for a junior interview.)
+            //(This is the “mini-report” task. If you can do this cleanly,
+            //to be blunt, you’re dangerous for a junior interview.)
 
 
 
