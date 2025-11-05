@@ -60,15 +60,51 @@ namespace SomeProgrammingConcepts
             //            Sort warehouses by GrandTotalQty descending.
 
 
+            var ProductsStock = stock.Join(
+                products,
+                StockKey => StockKey.ProductId,
+                ProductsKey => ProductsKey.ProductId,
+                (StockKey, ProductsKey) => new
+                {
+                    Category = ProductsKey.Category,
+                    ProductName = ProductsKey.Name,
+                    Qty = StockKey.Qty,
+                    ProductId = StockKey.ProductId,
+                    WarehouseId = StockKey.WarehouseId
+                });
 
+            var GroupingProductsStock = ProductsStock
+                .GroupBy(x => new { x.WarehouseId, x.Category })
+                .Select(x => new
+                {
+                    Products = x.Select(y => y.ProductName).Distinct().OrderBy(p=>p),
+                    TotalQty = x.Sum(y => y.Qty),
+                    WarehouseId = x.Key.WarehouseId,
+                    Category = x.Key.Category
+                });
 
-
-
-
-
-
-
-
+            var GroupingWarehouse = GroupingProductsStock
+                .GroupBy(g => g.WarehouseId)
+                .Select(x => new
+                {
+                    WarehouseId = x.Key,
+                    Categories = x.Select(c=> new
+                    {
+                        category = c.Category,
+                        Products = c.Products,
+                        TotalQty = c.TotalQty
+                    }),
+                    GrandTotalQty = x.Sum(x => x.TotalQty)
+                })
+                .Join(warehouses,
+                GroupingProductsStockKey => GroupingProductsStockKey.WarehouseId,
+                warehousesKey => warehousesKey.WarehouseId,
+                (GroupingProductsStockKey, warehousesKey) => new
+                {
+                    WarehouseName = warehousesKey.Name,
+                    Categories = GroupingProductsStockKey.Categories,
+                    GrandTotalQty = GroupingProductsStockKey.GrandTotalQty
+                }).OrderByDescending(x => x.GrandTotalQty);
 
 
             //Exercise L12 – Orders by Region (Multi-level Grouping)
