@@ -172,7 +172,7 @@ namespace SomeProgrammingConcepts
                 }).OrderByDescending(c => c.TotalValue);
 
 
-
+            //IS ON HOLD BSC. I AM BECOMING JR. DEVOPS ENGINEER AND LINQ IS NOT USED ATM
 
 
 

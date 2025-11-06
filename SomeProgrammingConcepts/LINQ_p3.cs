@@ -8,5 +8,6 @@ namespace SomeProgrammingConcepts
 {
     internal class Class3
     {
+        //IS ON HOLD BSC. I AM BECOMING JR. DEVOPS ENGINEER AND LINQ IS NOT USED ATM
     }
 }
