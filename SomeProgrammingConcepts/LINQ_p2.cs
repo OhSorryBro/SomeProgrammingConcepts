@@ -130,7 +130,6 @@ namespace SomeProgrammingConcepts
                 };
             //Task:
             //Build a report:
-
             //{
             //        RegionName: "...",
             //        Customers:
@@ -144,16 +143,33 @@ namespace SomeProgrammingConcepts
             //            ],
             //            RegionTotalValue: ...
             //         }
-
             //Requirements:
-
             //Group customers by region.
             //Sort customers by TotalValue descending.
             //Sort regions by RegionTotalValue descending.
 
+            var OrdersCustomers = customers.Join(
+                orders,
+                CustomersKey => CustomersKey.CustomerId,
+                OrdersKey => OrdersKey.CustomerId,
+                (CustomersKey, OrdersKey) => new
+                {
+                    CustomerName = CustomersKey.Name,
+                    CustomerID = CustomersKey.CustomerId,
+                    Value = OrdersKey.Value,
+                    OrderID = OrdersKey.OrderId,
+                    RegionId = CustomersKey.RegionId
+                });
 
-
-
+            var OrdersCustomersGrouped = OrdersCustomers
+                .GroupBy(x => new { x.CustomerID, x.CustomerName, x.RegionId })
+                .Select(x => new
+                {
+                    CustomerName = x.Key.CustomerName,
+                    Orders = x.Select(o => new { o.OrderID, o.Value }).OrderByDescending(o => o.Value),
+                    TotalValue = x.Sum(o => o.Value),
+                    RegionId = x.Key.RegionId
+                }).OrderByDescending(c => c.TotalValue);
 
 
 
